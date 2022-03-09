@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { FlexBox } from "../common";
+import { FlexBox } from "../../common";
 
 const StyledInput = styled.input`
     padding: 10px;
