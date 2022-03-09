@@ -1,8 +1,9 @@
 import React from 'react';
+import { CoreLayout } from './components';
 
 function App() {
   return (
-    <div>Hello</div>
+    <CoreLayout />
   );
 }
 
