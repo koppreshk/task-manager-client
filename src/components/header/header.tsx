@@ -6,9 +6,11 @@ import { HeaderLabel } from "./header-label"
 
 const StyledFlexBox = styled(FlexBox)`
     background-color: #fff;
-    box-shadow: 1px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
     padding: 25px 20px;
+    margin-top: 50px;
     width: 400px;
+    border-radius: 4px;
 `;
 
 export const Header = React.memo(() => {
