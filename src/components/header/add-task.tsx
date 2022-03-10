@@ -15,7 +15,8 @@ const SubmitButton = styled.button`
     padding: 4px;
     height: 30px;
     width: 200px;
-    background-color: rgba(180, 241, 182, 0.89);
+    background-color: #6c4f8f;
+    color: #fff;
     border: none;
     cursor: pointer;
 `;

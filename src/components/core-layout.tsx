@@ -5,7 +5,7 @@ import { GetTaskList } from "../containers";
 import { Header } from "./header";
 
 const StyledFlexBox = styled(FlexBox)`
-    background-color: rgba(199, 230, 200, 0.89);
+    background: linear-gradient(to bottom,#654a86,#534292);
     width: 100%;
     height: 100%;
 `;
