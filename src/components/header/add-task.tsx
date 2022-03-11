@@ -22,10 +22,28 @@ const SubmitButton = styled.button`
 `;
 
 export const AddTask = React.memo(() => {
+    const [value, setValue] = React.useState('');
+
+    const handleTextInput = React.useCallback((ev: React.ChangeEvent<HTMLInputElement>) => {
+        setValue(ev.target.value);
+    }, []);
+
+    const handleSubmit = React.useCallback(() => {
+        fetch('http://localhost:9000/api/v1/tasks', {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: value
+            }),
+        }).then(res => res.json()).then(res => console.log(res)).catch(err => console.log(err))
+    }, [value]);
+
     return (
         <FlexBox gap="8px" >
-            <StyledInput type="text" />
-            <SubmitButton type="submit" >SUBMIT</SubmitButton>
+            <StyledInput type="text" value={value} onChange={handleTextInput} />
+            <SubmitButton type="submit" onClick={handleSubmit}>SUBMIT</SubmitButton>
         </FlexBox>
     )
 })

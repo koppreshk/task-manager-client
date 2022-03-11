@@ -2,6 +2,7 @@ import React from "react"
 import styled from "styled-components";
 import { FlexBox } from "../../common";
 import { ITaskMetadata } from "../../types";
+import { TaskItem } from "./task-item";
 
 const StyledFlexBox = styled(FlexBox)`
     background-color: #fff;
@@ -21,7 +22,7 @@ export const TaskList = React.memo((props: ITaskListProps) => {
         <StyledFlexBox flexDirection="column">
             {
                 tasksList.length > 0
-                    ? tasksList.map((item) => <div key={item._id}>{item.name}</div>)
+                    ? tasksList.map((item) => <TaskItem key={item._id} name={item.name} />)
                     : null
             }
         </StyledFlexBox>
