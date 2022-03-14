@@ -21,6 +21,6 @@ export const GetTaskList = () => {
     const tasksList = data as unknown as ITaskMetadata[];
 
     return (
-        <TaskList tasksList={tasksList} />
+        tasksList.length > 0 ? <TaskList tasksList={tasksList} /> : null
     )
 }

@@ -21,9 +21,7 @@ export const TaskList = React.memo((props: ITaskListProps) => {
     return (
         <StyledFlexBox flexDirection="column">
             {
-                tasksList.length > 0
-                    ? tasksList.map((item) => <TaskItem key={item._id} name={item.name} />)
-                    : null
+                tasksList.map((item) => <TaskItem key={item._id} {...item} />)
             }
         </StyledFlexBox>
     );
