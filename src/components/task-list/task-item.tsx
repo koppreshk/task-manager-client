@@ -1,9 +1,7 @@
 import React from "react"
 import styled from "styled-components";
-import { IconButton } from "@mui/material";
 import { FlexBox } from "../../common"
-import DeleteIcon from '@mui/icons-material/Delete';
-import { TaskCompletionContainer } from "../../containers";
+import { TaskCompletionContainer, TaskDeleteContainer } from "../../containers";
 import { ITaskMetadata } from "../../types";
 
 interface ITaskItemProps extends ITaskMetadata {
@@ -19,15 +17,13 @@ const StyledText = styled.span`
 `;
 
 export const TaskItem = React.memo((props: ITaskItemProps) => {
-    const { name } = props;
+    const { name, _id } = props;
 
     return (
         <StyledFlexBox gap="10px" width="100%" height="40px" alignItems="center">
             <TaskCompletionContainer {...props} />
             <StyledText>{name}</StyledText>
-            <IconButton aria-label="delete">
-                <DeleteIcon />
-            </IconButton>
+            <TaskDeleteContainer _id={_id} />
         </StyledFlexBox>
     )
 })
