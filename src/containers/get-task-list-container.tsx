@@ -2,6 +2,7 @@ import React from "react";
 import { useQuery } from "react-query";
 import { TaskList } from "../components/task-list"
 import { ITaskMetadata } from "../types";
+import { CircularProgress } from '@mui/material';
 
 export const GetTaskListContainer = () => {
     const { isLoading, isError, data, error } = useQuery('getTaskList', () => {
@@ -12,12 +13,15 @@ export const GetTaskListContainer = () => {
     })
 
     if (isLoading) {
-        return <span>Loading...</span>
+        return (
+            <CircularProgress />
+        )
     }
 
     if (isError) {
         return <span>Error: {error}</span>
     }
+
     const tasksList = data as unknown as ITaskMetadata[];
 
     return (

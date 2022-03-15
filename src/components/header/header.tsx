@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components";
 import { FlexBox } from "../../common"
-import { AddTask } from "./add-task"
+import { AddTaskContainer } from "../../containers";
 import { HeaderLabel } from "./header-label"
 
 const StyledFlexBox = styled(FlexBox)`
@@ -17,7 +17,7 @@ export const Header = React.memo(() => {
     return (
         <StyledFlexBox flexDirection="column" gap="16px" justifyContent="center" alignItems="center">
             <HeaderLabel />
-            <AddTask />
+            <AddTaskContainer />
         </StyledFlexBox>
     )
 })
