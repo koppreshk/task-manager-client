@@ -7,8 +7,8 @@ interface IAddTaskContainerProps { }
 export const AddTaskContainer = React.memo((props: IAddTaskContainerProps) => {
     const queryClient = useQueryClient()
 
-    const onAddTask = React.useCallback((value: string) => {
-        return fetch('http://localhost:9000/api/v1/tasks', {
+    const onAddTask = React.useCallback(async (value: string) => {
+        return await fetch('http://localhost:9000/api/v1/tasks', {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json'
@@ -16,7 +16,7 @@ export const AddTaskContainer = React.memo((props: IAddTaskContainerProps) => {
             body: JSON.stringify({
                 name: value
             }),
-        }).then(res => res.json()).then(res => console.log(res)).catch(err => console.log(err))
+        })
     }, []);
 
     const mutation = useMutation('addTask', onAddTask, {
