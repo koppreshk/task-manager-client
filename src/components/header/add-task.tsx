@@ -1,24 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import { FlexBox } from "../../common";
+import { Button, TextField } from "@mui/material";
+import AddTaskIcon from '@mui/icons-material/AddTask';
 
-const StyledInput = styled.input`
-    padding: 10px;
-    border: 1px solid black;
-    border-radius: 4px;
-    outline: none;
-    height: 30px;
-    box-sizing: border-box;
-`;
-
-const SubmitButton = styled.button`
-    padding: 4px;
-    height: 30px;
-    width: 200px;
+const AddTaskButton = styled(Button)`
     background-color: #6c4f8f;
-    color: #fff;
-    border: none;
-    cursor: pointer;
+    :hover {
+        background-color: #534292b3;
+    }
 `;
 
 export const AddTask = React.memo(() => {
@@ -42,8 +32,15 @@ export const AddTask = React.memo(() => {
 
     return (
         <FlexBox gap="8px" >
-            <StyledInput type="text" value={value} onChange={handleTextInput} />
-            <SubmitButton type="submit" onClick={handleSubmit}>SUBMIT</SubmitButton>
+            <TextField
+                type="text"
+                label="Enter Task Name"
+                size="small"
+                value={value}
+                onChange={handleTextInput} />
+            <AddTaskButton type="submit" size="small" onClick={handleSubmit} variant="contained" endIcon={<AddTaskIcon />}>
+                Add Task
+            </AddTaskButton>
         </FlexBox>
     )
 })
