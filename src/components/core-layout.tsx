@@ -5,7 +5,7 @@ import { GetTaskListContainer } from "../containers";
 import { Header } from "./header";
 
 const StyledFlexBox = styled(FlexBox)`
-    background: linear-gradient(to bottom,#654a86,#534292);
+    background: linear-gradient(to bottom,#1976d2,#534292);
     width: 100%;
     height: 100%;
 `;

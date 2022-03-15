@@ -1,14 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import { FlexBox } from "../../common";
-import { Button, CircularProgress, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import AddTaskIcon from '@mui/icons-material/AddTask';
+import { LoadingButton } from "@mui/lab";
 
-const AddTaskButton = styled(Button)`
-    background-color: #6c4f8f;
-    :hover {
-        background-color: #534292b3;
-    }
+const AddTaskButton = styled(LoadingButton)`
+    
 `;
 
 interface IAddTaskProps {
@@ -39,13 +37,14 @@ export const AddTask = React.memo((props: IAddTaskProps) => {
                 size="small"
                 value={value}
                 onChange={handleTextInput} />
-            {<AddTaskButton
-                type="submit" size="small"
-                onClick={onAddClick} variant="contained"
-                disabled={onTaskMutationLoading}
-                endIcon={onTaskMutationLoading ? <CircularProgress size="30" /> : <AddTaskIcon />}>
+            <AddTaskButton
+                loading={onTaskMutationLoading}
+                loadingPosition="start"
+                onClick={onAddClick}
+                variant="contained"
+                startIcon={<AddTaskIcon />}>
                 Add Task
-            </AddTaskButton>}
+            </AddTaskButton>
         </FlexBox>
     )
 })

@@ -1,4 +1,5 @@
 import React from "react";
+import { useMutation, useQueryClient } from "react-query";
 import { EditTaskName } from "../components/task-list"
 import { ITaskMetadata } from "../types";
 
@@ -7,9 +8,10 @@ interface IEditTaskNameContainerProps extends Omit<ITaskMetadata, 'completed'> {
 }
 export const EditTaskNameContainer = React.memo((props: IEditTaskNameContainerProps) => {
     const { _id, name, toggleEditMode } = props;
+    const queryClient = useQueryClient();
 
-    const onEditNameChange = React.useCallback((editedName: string) => {
-        fetch(`http://localhost:9000/api/v1/tasks/${_id}`, {
+    const onEditNameChange = React.useCallback(async (editedName: string) => {
+        return await fetch(`http://localhost:9000/api/v1/tasks/${_id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
@@ -18,12 +20,15 @@ export const EditTaskNameContainer = React.memo((props: IEditTaskNameContainerPr
                 name: editedName
             }),
         })
-            .then(res => res.json())
-            .then(res => console.log(res))
-            .catch(err => console.log(err))
     }, [_id]);
 
+    const mutation = useMutation('editTask', onEditNameChange, {
+        onSuccess: () => {
+            queryClient.invalidateQueries('getTaskList')
+        },
+    })
+
     return (
-        <EditTaskName name={name} onEditNameChange={onEditNameChange} toggleEditMode={toggleEditMode} />
+        <EditTaskName name={name} onEditNameMutation={mutation.mutate} toggleEditMode={toggleEditMode} />
     )
 })
