@@ -2,10 +2,10 @@ import React from "react";
 import { TaskDeleteButton } from "../components/task-list"
 import { ITaskMetadata } from "../types";
 
-interface ITaskDeleteContainerProps extends Pick<ITaskMetadata, '_id'> {
+interface IDeleteTaskContainerProps extends Pick<ITaskMetadata, '_id'> {
 
 }
-export const TaskDeleteContainer = React.memo((props: ITaskDeleteContainerProps) => {
+export const DeleteTaskContainer = React.memo((props: IDeleteTaskContainerProps) => {
     const { _id } = props;
 
     const onDelete = React.useCallback(() => {

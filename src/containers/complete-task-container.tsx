@@ -5,7 +5,7 @@ import { ITaskMetadata } from "../types";
 interface ITaskCompletionContainerProps extends ITaskMetadata {
 
 }
-export const TaskCompletionContainer = React.memo((props: ITaskCompletionContainerProps) => {
+export const CompleteTaskContainer = React.memo((props: ITaskCompletionContainerProps) => {
     const { _id, completed, name } = props;
 
     const onCheckboxValueChange = React.useCallback((isCompleted: boolean) => {

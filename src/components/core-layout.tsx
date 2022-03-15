@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { FlexBox } from "../common";
-import { GetTaskList } from "../containers";
+import { GetTaskListContainer } from "../containers";
 import { Header } from "./header";
 
 const StyledFlexBox = styled(FlexBox)`
@@ -14,7 +14,7 @@ export const CoreLayout = () => {
     return (
         <StyledFlexBox flexDirection="column" alignItems="center" gap="10px">
             <Header />
-            <GetTaskList />
+            <GetTaskListContainer />
         </StyledFlexBox>
     )
 }

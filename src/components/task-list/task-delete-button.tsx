@@ -13,7 +13,7 @@ export const TaskDeleteButton = React.memo((props: ITaskDeleteButtonProps) => {
     }, [onDelete]);
 
     return (
-        <IconButton aria-label="delete" onClick={deleteClickHandler}>
+        <IconButton aria-label="delete" title="Delete" onClick={deleteClickHandler}>
             <DeleteIcon />
         </IconButton>
     );
