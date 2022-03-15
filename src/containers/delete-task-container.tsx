@@ -1,5 +1,5 @@
 import React from "react";
-import { TaskDeleteButton } from "../components/task-list"
+import { DeleteTask } from "../components/task-list"
 import { ITaskMetadata } from "../types";
 
 interface IDeleteTaskContainerProps extends Pick<ITaskMetadata, '_id'> {
@@ -18,6 +18,6 @@ export const DeleteTaskContainer = React.memo((props: IDeleteTaskContainerProps)
     }, [_id]);
 
     return (
-        <TaskDeleteButton onDelete={onDelete} />
+        <DeleteTask onDelete={onDelete} />
     )
 })

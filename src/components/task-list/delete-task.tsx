@@ -2,10 +2,10 @@ import React from "react";
 import { IconButton } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 
-interface ITaskDeleteButtonProps {
+interface IDeleteTaskProps {
     onDelete: () => void;
 }
-export const TaskDeleteButton = React.memo((props: ITaskDeleteButtonProps) => {
+export const DeleteTask = React.memo((props: IDeleteTaskProps) => {
     const { onDelete } = props;
 
     const deleteClickHandler = React.useCallback(() => {

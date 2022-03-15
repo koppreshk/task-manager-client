@@ -25,7 +25,9 @@ export const AddTask = React.memo((props: IAddTaskProps) => {
     }, []);
 
     const onAddClick = React.useCallback(() => {
-        onAddTaskMutation(value);
+        if (value.length > 0) {
+            onAddTaskMutation(value);
+        }
         setValue('');
     }, [onAddTaskMutation, value]);
 
