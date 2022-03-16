@@ -6,6 +6,7 @@ import { TaskItem } from "./task-item";
 
 const StyledFlexBox = styled(FlexBox)`
     background-color: #fff;
+    overflow: auto; 
     width: 400px;
     height: 400px;
     padding: 25px 20px;

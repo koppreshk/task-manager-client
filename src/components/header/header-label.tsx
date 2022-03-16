@@ -3,7 +3,8 @@ import styled from "styled-components";
 
 const TaskManagerHeading = styled.span`
     font-size: 20px;
-    color: #6c4f8f;
+    font-weight: 500;
+    color: #1976d2;
 `;
 
 export const HeaderLabel = React.memo(() => {

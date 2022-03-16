@@ -2,15 +2,15 @@ import React from "react";
 import { IconButton } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 
-interface ITaskDeleteButtonProps {
-    onDelete: () => void;
+interface IDeleteTaskProps {
+    onDeleteTaskMutation: () => void;
 }
-export const TaskDeleteButton = React.memo((props: ITaskDeleteButtonProps) => {
-    const { onDelete } = props;
+export const DeleteTask = React.memo((props: IDeleteTaskProps) => {
+    const { onDeleteTaskMutation } = props;
 
     const deleteClickHandler = React.useCallback(() => {
-        onDelete();
-    }, [onDelete]);
+        onDeleteTaskMutation();
+    }, [onDeleteTaskMutation]);
 
     return (
         <IconButton aria-label="delete" title="Delete" onClick={deleteClickHandler}>

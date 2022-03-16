@@ -1,34 +1,33 @@
 import React from "react";
 import styled from "styled-components";
 import { FlexBox } from "../../common";
-import { Button, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import AddTaskIcon from '@mui/icons-material/AddTask';
+import { LoadingButton } from "@mui/lab";
 
-const AddTaskButton = styled(Button)`
-    background-color: #6c4f8f;
-    :hover {
-        background-color: #534292b3;
-    }
+const AddTaskButton = styled(LoadingButton)`
+    
 `;
 
-export const AddTask = React.memo(() => {
+interface IAddTaskProps {
+    onTaskMutationLoading: boolean;
+    onAddTaskMutation: (value: string) => void
+}
+
+export const AddTask = React.memo((props: IAddTaskProps) => {
+    const { onTaskMutationLoading, onAddTaskMutation } = props;
     const [value, setValue] = React.useState('');
 
     const handleTextInput = React.useCallback((ev: React.ChangeEvent<HTMLInputElement>) => {
         setValue(ev.target.value);
     }, []);
 
-    const handleSubmit = React.useCallback(() => {
-        fetch('http://localhost:9000/api/v1/tasks', {
-            method: 'post',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                name: value
-            }),
-        }).then(res => res.json()).then(res => console.log(res)).catch(err => console.log(err))
-    }, [value]);
+    const onAddClick = React.useCallback(() => {
+        if (value.length > 0) {
+            onAddTaskMutation(value);
+        }
+        setValue('');
+    }, [onAddTaskMutation, value]);
 
     return (
         <FlexBox gap="8px" >
@@ -38,7 +37,12 @@ export const AddTask = React.memo(() => {
                 size="small"
                 value={value}
                 onChange={handleTextInput} />
-            <AddTaskButton type="submit" size="small" onClick={handleSubmit} variant="contained" endIcon={<AddTaskIcon />}>
+            <AddTaskButton
+                loading={onTaskMutationLoading}
+                loadingPosition="start"
+                onClick={onAddClick}
+                variant="contained"
+                startIcon={<AddTaskIcon />}>
                 Add Task
             </AddTaskButton>
         </FlexBox>
