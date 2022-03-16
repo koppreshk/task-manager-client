@@ -10,11 +10,11 @@ const StyledFlexBox = styled(FlexBox)`
     height: 100%;
 `;
 
-export const CoreLayout = () => {
+export const CoreLayout = React.memo(() => {
     return (
         <StyledFlexBox flexDirection="column" alignItems="center" gap="10px">
             <Header />
             <GetTaskListContainer />
         </StyledFlexBox>
     )
-}
+})

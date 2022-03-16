@@ -1,5 +1,6 @@
 import React from "react";
 import { useMutation, useQueryClient } from "react-query";
+import { useServiceClient } from "../common";
 import { DeleteTask } from "../components/task-list"
 import { ITaskMetadata } from "../types";
 
@@ -9,12 +10,11 @@ interface IDeleteTaskContainerProps extends Pick<ITaskMetadata, '_id'> {
 export const DeleteTaskContainer = React.memo((props: IDeleteTaskContainerProps) => {
     const { _id } = props;
     const queryClient = useQueryClient();
+    const { deleteData } = useServiceClient();
 
     const onDelete = React.useCallback(async () => {
-        return await fetch(`http://localhost:9000/api/v1/tasks/${_id}`, {
-            method: 'DELETE'
-        })
-    }, [_id]);
+        return await deleteData(`/api/v1/tasks/${_id}`)
+    }, [_id, deleteData]);
 
     const mutation = useMutation('deleteTask', onDelete, {
         onSuccess: () => {

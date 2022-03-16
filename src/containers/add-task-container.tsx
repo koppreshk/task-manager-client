@@ -1,23 +1,17 @@
 import React from "react";
 import { useMutation, useQueryClient } from "react-query";
+import { useServiceClient } from "../common";
 import { AddTask } from "../components/header";
 
 interface IAddTaskContainerProps { }
 
 export const AddTaskContainer = React.memo((props: IAddTaskContainerProps) => {
     const queryClient = useQueryClient()
+    const { postData } = useServiceClient();
 
     const onAddTask = React.useCallback(async (value: string) => {
-        return await fetch('http://localhost:9000/api/v1/tasks', {
-            method: 'post',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                name: value
-            }),
-        })
-    }, []);
+        return await postData('/api/v1/tasks', 'POST', { name: value })
+    }, [postData]);
 
     const mutation = useMutation('addTask', onAddTask, {
         onSuccess: () => {

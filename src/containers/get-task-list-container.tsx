@@ -3,10 +3,12 @@ import { useQuery } from "react-query";
 import { TaskList } from "../components/task-list"
 import { ITaskMetadata } from "../types";
 import { CircularProgress } from '@mui/material';
+import { useServiceClient } from "../common";
 
 export const GetTaskListContainer = () => {
+    const { getData } = useServiceClient();
     const { isLoading, isError, data, error } = useQuery('getTaskList', () => {
-        return fetch('http://localhost:9000/api/v1/tasks')
+        return getData('/api/v1/tasks')
             .then(response => response.json())
             .then(data => data.tasks)
             .catch(err => err);
