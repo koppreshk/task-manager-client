@@ -7,7 +7,7 @@ import { useServiceClient } from "../common";
 
 export const GetTaskListContainer = () => {
     const { getData } = useServiceClient();
-    const { isLoading, isError, data, error } = useQuery('getTaskList', () => {
+    const { isLoading, data, error } = useQuery('getTaskList', () => {
         return getData('/api/v1/tasks')
             .then(response => response.json())
             .then(data => data.tasks)
@@ -20,13 +20,13 @@ export const GetTaskListContainer = () => {
         )
     }
 
-    if (isError) {
-        return <span>Error: {error}</span>
+    if (data) {
+        const tasksList = data as unknown as ITaskMetadata[];
+
+        return (
+            tasksList.length > 0 ? <TaskList tasksList={tasksList} /> : null
+        )
     }
 
-    const tasksList = data as unknown as ITaskMetadata[];
-
-    return (
-        tasksList.length > 0 ? <TaskList tasksList={tasksList} /> : null
-    )
+    return <span>Error: {error}</span>
 }
