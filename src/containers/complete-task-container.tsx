@@ -8,7 +8,7 @@ interface ITaskCompletionContainerProps extends ITaskMetadata {
 }
 export const CompleteTaskContainer = React.memo((props: ITaskCompletionContainerProps) => {
     const { _id, completed, name } = props;
-    const { postData } = useServiceClient();
+    const { postData } = useServiceClient<{ name: string, completed: boolean }>();
 
     const onCheckboxValueChange = React.useCallback((isCompleted: boolean) => {
         postData(`/api/v1/tasks/${_id}`, 'PATCH', {

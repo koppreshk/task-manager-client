@@ -10,7 +10,7 @@ interface IEditTaskNameContainerProps extends Omit<ITaskMetadata, 'completed'> {
 export const EditTaskNameContainer = React.memo((props: IEditTaskNameContainerProps) => {
     const { _id, name, toggleEditMode } = props;
     const queryClient = useQueryClient();
-    const { postData } = useServiceClient();
+    const { postData } = useServiceClient<{ name: string }>();
 
     const onEditNameChange = React.useCallback(async (editedName: string) => {
         return await postData(`/api/v1/tasks/${_id}`, 'PATCH', {

@@ -7,7 +7,7 @@ interface IAddTaskContainerProps { }
 
 export const AddTaskContainer = React.memo((props: IAddTaskContainerProps) => {
     const queryClient = useQueryClient()
-    const { postData } = useServiceClient();
+    const { postData } = useServiceClient<{ name: string }>();
 
     const onAddTask = React.useCallback(async (value: string) => {
         return await postData('/api/v1/tasks', 'POST', { name: value })

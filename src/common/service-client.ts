@@ -1,9 +1,4 @@
-interface IAPIBody {
-    name: string;
-    completed?: boolean;
-}
-
-class ServiceClient {
+class ServiceClient<T extends {}> {
     private serverURL: string | undefined;
 
     constructor() {
@@ -13,7 +8,7 @@ class ServiceClient {
     public getData = (path: string) => {
         return fetch(`${this.serverURL}${path}`)
     }
-    public postData = (path: string, method: 'POST' | 'PATCH', body: IAPIBody) => {
+    public postData = (path: string, method: 'POST' | 'PATCH', body: T) => {
         const headers = new Headers();
         headers.append('Content-Type', 'application/json')
         return fetch(`${this.serverURL}${path}`, {
@@ -30,4 +25,4 @@ class ServiceClient {
     }
 }
 
-export const useServiceClient = () => new ServiceClient();
+export const useServiceClient = <T>() => new ServiceClient<T>();
