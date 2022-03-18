@@ -13,7 +13,7 @@ export const EditTaskNameContainer = React.memo((props: IEditTaskNameContainerPr
     const { postData } = useServiceClient<{ name: string }>();
 
     const onEditNameChange = React.useCallback(async (editedName: string) => {
-        return await postData(`/api/v1/tasks/${_id}`, 'PATCH', {
+        return await postData(`/api/v1/tasks/updateTask/${_id}`, 'PATCH', {
             name: editedName
         })
     }, [_id, postData]);

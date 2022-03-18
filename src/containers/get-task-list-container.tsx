@@ -8,7 +8,7 @@ import { useServiceClient } from "../common";
 export const GetTaskListContainer = () => {
     const { getData } = useServiceClient();
     const { isLoading, data, error } = useQuery('getTaskList', () => {
-        return getData('/api/v1/tasks')
+        return getData('/api/v1/tasks/getAllTasks')
             .then(response => response.json())
             .then(data => data.tasks)
             .catch(err => err);

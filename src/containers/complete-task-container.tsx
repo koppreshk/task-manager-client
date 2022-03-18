@@ -11,7 +11,7 @@ export const CompleteTaskContainer = React.memo((props: ITaskCompletionContainer
     const { postData } = useServiceClient<{ name: string, completed: boolean }>();
 
     const onCheckboxValueChange = React.useCallback((isCompleted: boolean) => {
-        postData(`/api/v1/tasks/${_id}`, 'PATCH', {
+        postData(`/api/v1/tasks/updateTask/${_id}`, 'PATCH', {
             name,
             completed: isCompleted
         })
