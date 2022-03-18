@@ -35,6 +35,7 @@ export const AddTask = React.memo((props: IAddTaskProps) => {
                 type="text"
                 label="Enter Task Name"
                 size="small"
+                autoComplete="off"
                 value={value}
                 onChange={handleTextInput} />
             <AddTaskButton

@@ -13,7 +13,7 @@ export const DeleteTaskContainer = React.memo((props: IDeleteTaskContainerProps)
     const { deleteData } = useServiceClient();
 
     const onDelete = React.useCallback(async () => {
-        return await deleteData(`/api/v1/tasks/${_id}`)
+        return await deleteData(`/api/v1/tasks/deleteTask/${_id}`)
     }, [_id, deleteData]);
 
     const mutation = useMutation('deleteTask', onDelete, {

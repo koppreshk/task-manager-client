@@ -10,7 +10,7 @@ export const AddTaskContainer = React.memo((props: IAddTaskContainerProps) => {
     const { postData } = useServiceClient<{ name: string }>();
 
     const onAddTask = React.useCallback(async (value: string) => {
-        return await postData('/api/v1/tasks', 'POST', { name: value })
+        return await postData('/api/v1/tasks/createTask', 'POST', { name: value })
     }, [postData]);
 
     const mutation = useMutation('addTask', onAddTask, {
