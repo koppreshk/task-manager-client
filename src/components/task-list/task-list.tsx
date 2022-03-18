@@ -1,4 +1,6 @@
+import { Collapse } from "@mui/material";
 import React from "react"
+import { TransitionGroup } from "react-transition-group";
 import styled from "styled-components";
 import { FlexBox } from "../../common";
 import { ITaskMetadata } from "../../types";
@@ -21,9 +23,17 @@ export const TaskList = React.memo((props: ITaskListProps) => {
     const { tasksList } = props;
     return (
         <StyledFlexBox flexDirection="column">
-            {
-                tasksList.map((item) => <TaskItem key={item._id} {...item} />)
-            }
-        </StyledFlexBox>
+            <TransitionGroup >
+                {
+                    tasksList.map((item) => {
+                        return (
+                            <Collapse key={item._id}>
+                                <TaskItem  {...item} />
+                            </Collapse>
+                        )
+                    })
+                }
+            </TransitionGroup>
+        </StyledFlexBox >
     );
 })
