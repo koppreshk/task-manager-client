@@ -73,7 +73,9 @@ export const CreateIssueForm = React.memo((props: ICreateIssueFormProps) => {
     const [state, dispatch] = React.useReducer(reducer, intialState);
 
     const onSubmitHandler = React.useCallback(() => {
-        onCreateNewIssue(state)
+        if (state.title.length > 0) {
+            onCreateNewIssue(state)
+        }
     }, [onCreateNewIssue, state]);
 
     const onSelectValueChange = React.useCallback((type: string, value: string) => {
@@ -85,6 +87,7 @@ export const CreateIssueForm = React.memo((props: ICreateIssueFormProps) => {
             <TextField
                 id="outlined-basic" label="Title" variant="outlined"
                 value={state.title}
+                required
                 onChange={(ev) => dispatch({ type: 'title', payload: ev.target.value })} />
             <TextareaAutosize
                 aria-label="Description"
