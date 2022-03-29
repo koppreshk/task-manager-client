@@ -1,7 +1,7 @@
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools'
-import { CoreLayout } from './components';
+import { CoreLayout } from './modules/core-layout/pages';
 
 const queryClient = new QueryClient({
   defaultOptions: {

@@ -18,6 +18,7 @@ export interface IFlexBlockBaseProps {
     overflowX?: Property.OverflowX;
     overflowY?: Property.OverflowY;
     gap?: Property.Gap;
+    padding?: Property.Padding;
 }
 
 export const FlexBox = styled.div<IFlexBlockBaseProps>`
@@ -39,4 +40,5 @@ export const FlexBox = styled.div<IFlexBlockBaseProps>`
     ${({ overflowX }) => overflowX && css`overflow-x: ${overflowX};`}
     ${({ overflowY }) => overflowY && css`overflow-y: ${overflowY};`}
     ${({ gap }) => gap && css`gap: ${gap};`}
+    ${({ padding }) => padding && css`padding: ${padding};`}
 `;
