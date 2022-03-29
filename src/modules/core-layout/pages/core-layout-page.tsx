@@ -10,7 +10,7 @@ const StyledFlexBox = styled(FlexBox)`
 
 export const CoreLayout = React.memo(() => {
     return (
-        <StyledFlexBox flexDirection="column" alignItems="center" gap="10px">
+        <StyledFlexBox flexDirection="column" gap="10px">
             <CreateIssueContainer />
         </StyledFlexBox>
     )
