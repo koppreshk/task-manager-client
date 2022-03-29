@@ -29,8 +29,8 @@ export const CreateIssue = React.memo((props: ICreateNewIssueProps) => {
     }, []);
 
     return (
-        <FlexBox padding="10px 0px 0px 0px">
-            <Button onClick={toggleModel} variant="outlined">Create Issue</Button>
+        <FlexBox padding="10px" justifyContent="flex-end">
+            <Button onClick={toggleModel} variant="contained">Create Issue</Button>
             <Modal
                 open={open}
                 onClose={toggleModel}>

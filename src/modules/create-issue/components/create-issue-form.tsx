@@ -2,6 +2,7 @@ import React from "react"
 import { Button, TextareaAutosize, TextField } from "@mui/material"
 import { FlexBox } from "../../../common"
 import { ICreateNewIssueBody } from "../api-body-types";
+import { SelectAvatarControl } from "./avatar-select-control";
 
 interface IState {
     title: string,
@@ -75,6 +76,10 @@ export const CreateIssueForm = React.memo((props: ICreateIssueFormProps) => {
         onCreateNewIssue(state)
     }, [onCreateNewIssue, state]);
 
+    const onSelectValueChange = React.useCallback((type: string, value: string) => {
+        dispatch({ type: type, payload: value })
+    }, []);
+
     return (
         <FlexBox gap="8px" width="100%" flexDirection="column">
             <TextField
@@ -85,7 +90,6 @@ export const CreateIssueForm = React.memo((props: ICreateIssueFormProps) => {
                 aria-label="Description"
                 minRows={3}
                 title="Description"
-                placeholder="Minimum 3 rows"
                 style={{ width: 394 }}
                 onChange={(ev) => dispatch({ type: 'description', payload: ev.target.value })}
             />
@@ -98,12 +102,19 @@ export const CreateIssueForm = React.memo((props: ICreateIssueFormProps) => {
             <TextField
                 id="outlined-basic" label="QA Comments" variant="outlined"
                 onChange={(ev) => dispatch({ type: 'qaComments', payload: ev.target.value })} />
-            <TextField
-                id="outlined-basic" label="Assignee" variant="outlined"
-                onChange={(ev) => dispatch({ type: 'assignee', payload: ev.target.value })} />
-            <TextField
-                id="outlined-basic" label="Reporter" variant="outlined"
-                onChange={(ev) => dispatch({ type: 'reporter', payload: ev.target.value })} />
+            <SelectAvatarControl
+                label="Assignee"
+                users={[{ fullName: 'Rakesh Kumar', key: 'Rakesh Kumar' }, { fullName: 'Manish P', key: 'Manish P' }]}
+                selectedValue={state.assignee}
+                onSelectValueChange={onSelectValueChange} />
+            <SelectAvatarControl
+                label="Reporter"
+                users={[
+                    { fullName: 'Rakesh Kumar', key: 'Rakesh Kumar' },
+                    { fullName: 'Manish P', key: 'Manish P' },
+                    { fullName: 'Krish l', key: 'Krish l' }]}
+                selectedValue={state.reporter}
+                onSelectValueChange={onSelectValueChange} />
             <Button type="submit" onClick={onSubmitHandler}>SUBMIT</Button>
         </FlexBox>
     )
