@@ -1,7 +1,7 @@
 import React from "react"
 import { useServiceClient } from "../../../common";
 import { ICreateNewIssueBody } from "../api-body-types";
-import { CreateIssue } from "../components"
+import { CreateNewIssue } from "../components"
 
 export const CreateIssueContainer = React.memo(() => {
     const { postData } = useServiceClient<ICreateNewIssueBody>();
@@ -11,6 +11,6 @@ export const CreateIssueContainer = React.memo(() => {
     }, [postData]);
 
     return (
-        <CreateIssue onCreateNewIssue={onCreateNewIssue} />
+        <CreateNewIssue onCreateNewIssue={onCreateNewIssue} />
     )
 })
