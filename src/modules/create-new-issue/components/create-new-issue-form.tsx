@@ -30,8 +30,9 @@ const intialState: IState = {
 }
 
 interface ICreateIssueFormProps {
-    onCreateNewIssue: (args: ICreateNewIssueBody) => Promise<Response>
+    formSubmitHandler: (args: ICreateNewIssueBody) => void;
 }
+
 const reducer = (state: IState, action: IAction) => {
     const { payload, type } = action;
     switch (type) {
@@ -69,14 +70,14 @@ const reducer = (state: IState, action: IAction) => {
 }
 
 export const CreateNewIssueForm = React.memo((props: ICreateIssueFormProps) => {
-    const { onCreateNewIssue } = props;
+    const { formSubmitHandler } = props;
     const [state, dispatch] = React.useReducer(reducer, intialState);
 
     const onSubmitHandler = React.useCallback(() => {
         if (state.title.length > 0) {
-            onCreateNewIssue(state)
+            formSubmitHandler(state)
         }
-    }, [onCreateNewIssue, state]);
+    }, [formSubmitHandler, state]);
 
     const onSelectValueChange = React.useCallback((type: string, value: string) => {
         dispatch({ type: type, payload: value })

@@ -14,6 +14,7 @@ const StyledFlexBox = styled(FlexBox)`
     height: calc(100% - 70px);
     background-color: #eceaea;
     border-radius: 4px;
+    overflow: auto;
 `;
 
 export const ListNewIssues = React.memo((props: IListNewIssues) => {

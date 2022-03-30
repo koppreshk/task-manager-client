@@ -17,7 +17,7 @@ const style = {
 };
 
 interface ICreateNewIssueProps {
-    onCreateNewIssue: (args: ICreateNewIssueBody) => Promise<Response>
+    onCreateNewIssue: (args: ICreateNewIssueBody) => void;
 }
 
 export const CreateNewIssue = React.memo((props: ICreateNewIssueProps) => {
@@ -28,6 +28,11 @@ export const CreateNewIssue = React.memo((props: ICreateNewIssueProps) => {
         setOpen((preValue) => !preValue);
     }, []);
 
+    const formSubmitHandler = React.useCallback((args: ICreateNewIssueBody) => {
+        onCreateNewIssue(args)
+        toggleModel()
+    }, [onCreateNewIssue, toggleModel]);
+
     return (
         <FlexBox padding="10px" justifyContent="flex-end">
             <Button onClick={toggleModel} variant="contained">Create Issue</Button>
@@ -35,7 +40,7 @@ export const CreateNewIssue = React.memo((props: ICreateNewIssueProps) => {
                 open={open}
                 onClose={toggleModel}>
                 <Box sx={style}>
-                    <CreateNewIssueForm onCreateNewIssue={onCreateNewIssue} />
+                    <CreateNewIssueForm formSubmitHandler={formSubmitHandler} />
                 </Box>
             </Modal>
         </FlexBox>
