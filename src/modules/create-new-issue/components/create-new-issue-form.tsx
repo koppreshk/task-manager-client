@@ -68,7 +68,7 @@ const reducer = (state: IState, action: IAction) => {
     }
 }
 
-export const CreateIssueForm = React.memo((props: ICreateIssueFormProps) => {
+export const CreateNewIssueForm = React.memo((props: ICreateIssueFormProps) => {
     const { onCreateNewIssue } = props;
     const [state, dispatch] = React.useReducer(reducer, intialState);
 

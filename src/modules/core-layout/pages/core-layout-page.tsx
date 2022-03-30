@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { FlexBox } from "../../../common";
-import { CreateIssueContainer } from "../../create-issue/containers";
+import { CreateIssueContainer } from "../../create-new-issue/containers";
 
 const StyledFlexBox = styled(FlexBox)`
     width: 100%;
