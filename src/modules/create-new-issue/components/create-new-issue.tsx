@@ -1,6 +1,6 @@
 import React from "react"
 import { Box, Button, Modal } from "@mui/material";
-import { CreateIssueForm } from "./create-issue-form";
+import { CreateNewIssueForm } from "./create-new-issue-form";
 import { FlexBox } from "../../../common";
 import { ICreateNewIssueBody } from "../api-body-types";
 
@@ -17,16 +17,21 @@ const style = {
 };
 
 interface ICreateNewIssueProps {
-    onCreateNewIssue: (args: ICreateNewIssueBody) => Promise<Response>
+    onCreateNewIssue: (args: ICreateNewIssueBody) => void;
 }
 
-export const CreateIssue = React.memo((props: ICreateNewIssueProps) => {
+export const CreateNewIssue = React.memo((props: ICreateNewIssueProps) => {
     const { onCreateNewIssue } = props;
     const [open, setOpen] = React.useState(false);
 
     const toggleModel = React.useCallback(() => {
         setOpen((preValue) => !preValue);
     }, []);
+
+    const formSubmitHandler = React.useCallback((args: ICreateNewIssueBody) => {
+        onCreateNewIssue(args)
+        toggleModel()
+    }, [onCreateNewIssue, toggleModel]);
 
     return (
         <FlexBox padding="10px" justifyContent="flex-end">
@@ -35,7 +40,7 @@ export const CreateIssue = React.memo((props: ICreateNewIssueProps) => {
                 open={open}
                 onClose={toggleModel}>
                 <Box sx={style}>
-                    <CreateIssueForm onCreateNewIssue={onCreateNewIssue} />
+                    <CreateNewIssueForm formSubmitHandler={formSubmitHandler} />
                 </Box>
             </Modal>
         </FlexBox>
