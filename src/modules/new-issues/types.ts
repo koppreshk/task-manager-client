@@ -7,7 +7,7 @@ export interface INewIssuesData {
     assignee: string;
     reporter: string;
     priority: string;
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt: string;
+    updatedAt: string;
     _id: string;
 }

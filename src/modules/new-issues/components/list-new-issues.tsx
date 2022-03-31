@@ -22,7 +22,7 @@ export const ListNewIssues = React.memo((props: IListNewIssues) => {
 
     return (
         <StyledFlexBox flexDirection="column" alignItems="center">
-            <Typography variant="subtitle1">New Issues</Typography>
+            <Typography variant="subtitle1">NEW ISSUES {newIssues.length}</Typography>
             {newIssues.map((issue) => <NewIssueTile key={issue._id} {...issue} />)}
         </StyledFlexBox>
     )

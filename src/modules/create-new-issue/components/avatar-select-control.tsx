@@ -1,7 +1,7 @@
 import React from "react"
 import { Avatar, FormControl, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { deepOrange } from "@mui/material/colors";
-import { FlexBox } from "../../../common";
+import { FlexBox, getNameInitials } from "../../../common";
 import InputLabel from '@mui/material/InputLabel';
 
 interface IUsers {
@@ -37,7 +37,7 @@ export const SelectAvatarControl = React.memo((props: ISelectControlProps) => {
                         <MenuItem value={key} key={key}>
                             <FlexBox gap="10px" alignItems="center">
                                 <Avatar sx={{ bgcolor: deepOrange[500], width: 30, height: 30, fontSize: '14px' }}>
-                                    {fullName.split(' ').map(name => name[0].toUpperCase()).join('')}
+                                    {getNameInitials(fullName)}
                                 </Avatar>
                                 <span>{fullName}</span>
                             </FlexBox>
