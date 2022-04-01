@@ -1,8 +1,7 @@
 import React from "react"
 import styled from "styled-components";
 import { Avatar, Tooltip, Typography } from "@mui/material";
-import { deepOrange } from "@mui/material/colors";
-import { FlexBox, getDateDiffInDays, getNameInitials } from "../../../common";
+import { FlexBox, getDateDiffInDays, getNameInitials, chooseRandomColors } from "../../../common";
 import { INewIssuesData } from "../types"
 import DensitySmallIcon from '@mui/icons-material/DensitySmall';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
@@ -23,11 +22,11 @@ const StyledFlexBox = styled(FlexBox)`
 const getPriorityIconComponent = (priority: string) => {
     switch (priority) {
         case 'medium':
-            return <DensitySmallIcon titleAccess="Medium Priority" />
+            return <DensitySmallIcon titleAccess="Medium Priority" sx={{ color: '#15e9e6' }}/>
         case 'high':
-            return <ArrowUpwardIcon titleAccess="High Priority" />
+            return <ArrowUpwardIcon titleAccess="High Priority" sx={{ color: '#e91515' }}/>
         default:
-            return <ArrowDownwardIcon titleAccess="Low Priority" />
+            return <ArrowDownwardIcon titleAccess="Low Priority" sx={{ color: '#26c43b' }} />
     }
 }
 
@@ -36,6 +35,7 @@ export const NewIssueTile = React.memo((props: INewIssueTileProps) => {
     const intitals = React.useMemo(() => getNameInitials(assignee), [assignee])
     const PriorityComponent = React.useMemo(() => getPriorityIconComponent(priority), [priority]);
     const dateDiffInDays = React.useMemo(() => getDateDiffInDays(new Date(createdAt), new Date()), [createdAt]);
+    const { backgroundColor, textColor } = React.useMemo(() => chooseRandomColors(assignee), [assignee]);
 
     return (
         <StyledFlexBox flexDirection="column" gap="4px">
@@ -48,7 +48,7 @@ export const NewIssueTile = React.memo((props: INewIssueTileProps) => {
                     <AccessTimeIcon />
                 </Tooltip>
                 <Tooltip title={`Assignee: ${assignee}`} arrow>
-                    <Avatar sx={{ bgcolor: deepOrange[500], width: 24, height: 24, fontSize: '12px' }}>{intitals}</Avatar>
+                    <Avatar sx={{ bgcolor: backgroundColor, color: textColor, width: 24, height: 24, fontSize: '12px', fontWeight: 600 }}>{intitals}</Avatar>
                 </Tooltip>
             </FlexBox>
         </StyledFlexBox>

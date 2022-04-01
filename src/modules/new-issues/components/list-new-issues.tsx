@@ -12,7 +12,7 @@ interface IListNewIssues {
 const StyledFlexBox = styled(FlexBox)`
     width: 200px;
     height: calc(100% - 70px);
-    background-color: #eceaea;
+    background-color: #e9e9e9;
     border-radius: 4px;
     overflow: auto;
 `;
