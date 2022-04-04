@@ -1,9 +1,7 @@
 import React from "react"
 import { Avatar, FormControl, MenuItem, Select, SelectChangeEvent } from "@mui/material";
-import { deepOrange } from "@mui/material/colors";
-import { FlexBox } from "../../../common";
+import { chooseRandomColors, FlexBox, getNameInitials } from "../../../common";
 import InputLabel from '@mui/material/InputLabel';
-
 interface IUsers {
     fullName: string;
     key: string;
@@ -33,18 +31,26 @@ export const SelectAvatarControl = React.memo((props: ISelectControlProps) => {
                 label={label}
                 onChange={handleChange}>
                 {
-                    users.map(({ fullName, key }, index) => (
-                        <MenuItem value={key} key={key}>
-                            <FlexBox gap="10px" alignItems="center">
-                                <Avatar sx={{ bgcolor: deepOrange[500], width: 30, height: 30, fontSize: '14px' }}>
-                                    {fullName.split(' ').map(name => name[0].toUpperCase()).join('')}
-                                </Avatar>
-                                <span>{fullName}</span>
-                            </FlexBox>
-                        </MenuItem>
-                    ))
+                    users.map((user) => <AvatarWithText {...user} />)
                 }
             </Select>
         </FormControl>
+    )
+})
+
+const AvatarWithText = React.memo((props: IUsers) => {
+    const { fullName, key } = props;
+    const { backgroundColor, textColor } = React.useMemo(() => chooseRandomColors(fullName), [fullName]);
+    const initials = React.useMemo(() => getNameInitials(fullName), [fullName]);
+
+    return (
+        <MenuItem value={key} key={key}>
+            <FlexBox gap="10px" alignItems="center">
+                <Avatar sx={{ bgcolor: backgroundColor, color: textColor, width: 30, height: 30, fontSize: '14px' }}>
+                    {initials}
+                </Avatar>
+                <span>{fullName}</span>
+            </FlexBox>
+        </MenuItem>
     )
 })

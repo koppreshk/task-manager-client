@@ -1,7 +1,7 @@
-import { Typography } from "@mui/material";
 import React from "react"
 import styled from "styled-components";
 import { FlexBox } from "../../../common";
+import { HeaderWithCount } from "../../shared";
 import { INewIssuesData } from "../types";
 import { NewIssueTile } from "./new-issue-tile";
 
@@ -11,8 +11,8 @@ interface IListNewIssues {
 
 const StyledFlexBox = styled(FlexBox)`
     width: 200px;
-    height: calc(100% - 70px);
-    background-color: #eceaea;
+    height: 100%;
+    background-color: #e9e9e9;
     border-radius: 4px;
     overflow: auto;
 `;
@@ -22,7 +22,7 @@ export const ListNewIssues = React.memo((props: IListNewIssues) => {
 
     return (
         <StyledFlexBox flexDirection="column" alignItems="center">
-            <Typography variant="subtitle1">New Issues</Typography>
+            <HeaderWithCount headerCount={newIssues.length} headerLabel="NEW" />
             {newIssues.map((issue) => <NewIssueTile key={issue._id} {...issue} />)}
         </StyledFlexBox>
     )
