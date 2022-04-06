@@ -1,9 +1,8 @@
 import React from "react"
 import styled from "styled-components";
 import { FlexBox } from "../../../common";
-import { HeaderWithCount } from "../../shared";
+import { HeaderWithCount, IssueTile } from "../../shared";
 import { INewIssuesData } from "../types";
-import { NewIssueTile } from "./new-issue-tile";
 
 interface IListDevelopmentInProgressIssues {
     developmentInProgressIssues: INewIssuesData[];
@@ -23,7 +22,7 @@ export const ListDevelopmentInProgressIssues = React.memo((props: IListDevelopme
     return (
         <StyledFlexBox flexDirection="column">
             <HeaderWithCount headerCount={developmentInProgressIssues.length} headerLabel="DEVELOPMENT IN PROGRESS" />
-            {developmentInProgressIssues.map((issue) => <NewIssueTile key={issue._id} {...issue} />)}
+            {developmentInProgressIssues.map((issue) => <IssueTile key={issue._id} {...issue} />)}
         </StyledFlexBox>
     )
 })

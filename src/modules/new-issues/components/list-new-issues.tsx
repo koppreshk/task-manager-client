@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { FlexBox } from "../../../common";
 import { HeaderWithCount } from "../../shared";
 import { INewIssuesData } from "../types";
-import { NewIssueTile } from "./new-issue-tile";
+import { IssueTile } from "../../shared";
 
 interface IListNewIssues {
     newIssues: INewIssuesData[];
@@ -23,7 +23,7 @@ export const ListNewIssues = React.memo((props: IListNewIssues) => {
     return (
         <StyledFlexBox flexDirection="column" alignItems="center">
             <HeaderWithCount headerCount={newIssues.length} headerLabel="NEW" />
-            {newIssues.map((issue) => <NewIssueTile key={issue._id} {...issue} />)}
+            {newIssues.map((issue) => <IssueTile key={issue._id} {...issue} />)}
         </StyledFlexBox>
     )
 })
