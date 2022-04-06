@@ -4,7 +4,7 @@ import { chooseRandomColors, FlexBox, getNameInitials } from "../../../common";
 import InputLabel from '@mui/material/InputLabel';
 interface IUsers {
     fullName: string;
-    key: string;
+    value: string;
 }
 
 interface ISelectControlProps {
@@ -16,7 +16,7 @@ interface ISelectControlProps {
 
 export const SelectAvatarControl = React.memo((props: ISelectControlProps) => {
     const { label, users, selectedValue, onSelectValueChange } = props
-
+    console.log(selectedValue);
     const handleChange = React.useCallback((event: SelectChangeEvent<typeof selectedValue>) => {
         onSelectValueChange(label.toLowerCase(), event.target.value);
     }, [label, onSelectValueChange]);
@@ -31,20 +31,24 @@ export const SelectAvatarControl = React.memo((props: ISelectControlProps) => {
                 label={label}
                 onChange={handleChange}>
                 {
-                    users.map((user) => <AvatarWithText {...user} />)
+                    users.map(({ fullName, value }) =>
+                        <AvatarWithText value={value} fullName={fullName} key={value} >
+                            {value}
+                        </AvatarWithText>)
                 }
+
             </Select>
         </FormControl>
     )
 })
 
-const AvatarWithText = React.memo((props: IUsers) => {
-    const { fullName, key } = props;
+const AvatarWithText = React.memo((props: IUsers & { children: React.ReactNode }) => {
+    const { fullName, ...rest } = props;
     const { backgroundColor, textColor } = React.useMemo(() => chooseRandomColors(fullName), [fullName]);
     const initials = React.useMemo(() => getNameInitials(fullName), [fullName]);
 
     return (
-        <MenuItem value={key} key={key}>
+        <MenuItem {...rest}>
             <FlexBox gap="10px" alignItems="center">
                 <Avatar sx={{ bgcolor: backgroundColor, color: textColor, width: 30, height: 30, fontSize: '14px' }}>
                     {initials}

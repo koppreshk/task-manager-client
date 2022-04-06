@@ -108,15 +108,15 @@ export const CreateNewIssueForm = React.memo((props: ICreateIssueFormProps) => {
                 onChange={(ev) => dispatch({ type: 'qaComments', payload: ev.target.value })} />
             <SelectAvatarControl
                 label="Assignee"
-                users={[{ fullName: 'Rakesh Kumar', key: 'Rakesh Kumar' }, { fullName: 'Manish P', key: 'Manish P' }]}
+                users={[{ fullName: 'Rakesh Kumar', value: 'Rakesh Kumar' }, { fullName: 'Manish P', value: 'Manish P' }]}
                 selectedValue={state.assignee}
                 onSelectValueChange={onSelectValueChange} />
             <SelectAvatarControl
                 label="Reporter"
                 users={[
-                    { fullName: 'Rakesh Kumar', key: 'Rakesh Kumar' },
-                    { fullName: 'Manish P', key: 'Manish P' },
-                    { fullName: 'Krish l', key: 'Krish l' }]}
+                    { fullName: 'Rakesh Kumar', value: 'Rakesh Kumar' },
+                    { fullName: 'Manish P', value: 'Manish P' },
+                    { fullName: 'Krish l', value: 'Krish l' }]}
                 selectedValue={state.reporter}
                 onSelectValueChange={onSelectValueChange} />
             <Button type="submit" onClick={onSubmitHandler}>SUBMIT</Button>
