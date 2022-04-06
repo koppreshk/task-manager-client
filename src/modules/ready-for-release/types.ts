@@ -1,13 +1,5 @@
-export interface IReadyForReleaseIssueData {
-    title: string;
-    description?: string;
-    changeSetDetails?: string;
-    codeReviewComments?: string;
-    qaComments: string;
-    assignee: string;
-    reporter: string;
-    priority: string;
-    createdAt: string;
-    updatedAt: string;
-    _id: string;
+import { IIssuesTileMetaData } from "../shared";
+
+export interface IReadyForReleaseIssueData extends IIssuesTileMetaData {
+
 }
