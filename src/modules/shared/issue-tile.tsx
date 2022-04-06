@@ -22,19 +22,19 @@ const StyledFlexBox = styled(FlexBox)`
 const getPriorityIconComponent = (priority: string) => {
     switch (priority) {
         case 'medium':
-            return <DensitySmallIcon titleAccess="Medium Priority" sx={{ color: '#15e9e6' }}/>
+            return <DensitySmallIcon titleAccess="Medium Priority" sx={{ color: '#15e9e6' }} />
         case 'high':
-            return <ArrowUpwardIcon titleAccess="High Priority" sx={{ color: '#e91515' }}/>
+            return <ArrowUpwardIcon titleAccess="High Priority" sx={{ color: '#e91515' }} />
         default:
             return <ArrowDownwardIcon titleAccess="Low Priority" sx={{ color: '#26c43b' }} />
     }
 }
 
 export const IssueTile = React.memo((props: IIssueTileProps) => {
-    const { priority, title, createdAt, assignee } = props;
+    const { priority, title, createdAt, updatedAt, assignee } = props;
     const intitals = React.useMemo(() => getNameInitials(assignee), [assignee])
     const PriorityComponent = React.useMemo(() => getPriorityIconComponent(priority), [priority]);
-    const dateDiffInDays = React.useMemo(() => getDateDiffInDays(new Date(createdAt), new Date()), [createdAt]);
+    const dateDiffInDays = React.useMemo(() => getDateDiffInDays(new Date(createdAt ? createdAt : updatedAt), new Date()), [createdAt, updatedAt]);
     const { backgroundColor, textColor } = React.useMemo(() => chooseRandomColors(assignee), [assignee]);
 
     return (

@@ -2,10 +2,10 @@ import React from "react"
 import styled from "styled-components";
 import { FlexBox } from "../../../common";
 import { HeaderWithCount, IssueTile } from "../../shared";
-import { INewIssuesData } from "../types";
+import { IDevelopmentInProgressIssuesData } from "../types";
 
 interface IListDevelopmentInProgressIssues {
-    developmentInProgressIssues: INewIssuesData[];
+    developmentInProgressIssues: IDevelopmentInProgressIssuesData[];
 }
 
 const StyledFlexBox = styled(FlexBox)`
