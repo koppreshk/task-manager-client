@@ -1,4 +1,4 @@
-export interface INewIssuesData {
+export interface IReadyForReleaseIssueData {
     title: string;
     description?: string;
     changeSetDetails?: string;
@@ -7,7 +7,7 @@ export interface INewIssuesData {
     assignee: string;
     reporter: string;
     priority: string;
-    createdAt?: string;
+    createdAt: string;
     updatedAt: string;
     _id: string;
 }
