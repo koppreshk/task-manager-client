@@ -2,13 +2,13 @@ import React from "react"
 import styled from "styled-components";
 import { Avatar, Tooltip, Typography } from "@mui/material";
 import { FlexBox, getDateDiffInDays, getNameInitials, chooseRandomColors } from "../../common";
-import { INewIssuesData } from "../new-issues/types"
 import DensitySmallIcon from '@mui/icons-material/DensitySmall';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import { IIssuesTileMetaData } from "./types";
 
-interface IIssueTileProps extends INewIssuesData { }
+interface IIssueTileProps extends IIssuesTileMetaData { }
 
 const StyledFlexBox = styled(FlexBox)`
     width: calc(100% - 20px);
