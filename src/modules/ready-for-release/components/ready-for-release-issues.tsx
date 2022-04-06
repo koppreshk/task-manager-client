@@ -21,7 +21,7 @@ export const ReadyForReleaseIssues = React.memo((props: IReadyForReleaseIssues) 
 
     return (
         <StyledFlexBox flexDirection="column">
-            <HeaderWithCount headerCount={readyForReleaseIssues.length} headerLabel="Ready For Release" />
+            <HeaderWithCount headerCount={readyForReleaseIssues.length} headerLabel="READY FOR RELEASE" />
             {readyForReleaseIssues.map((issue) => <IssueTile key={issue._id} {...issue} />)}
         </StyledFlexBox>
     )
