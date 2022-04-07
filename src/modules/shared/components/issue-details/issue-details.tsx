@@ -1,18 +1,18 @@
-import { Typography } from "@mui/material";
 import React from "react";
 import { FlexBox } from "../../../../common";
 import { IIssuesTileMetaData } from "../../types";
+import { IssueDetailsSection1 } from "./issue-details-section1";
 
-interface IIssueDetailsProps {
+export interface IIssueDetailsProps {
     issueMetadata: IIssuesTileMetaData;
 }
 
 export const IssueDetails = React.memo((props: IIssueDetailsProps) => {
     const { issueMetadata } = props;
-    const { title } = issueMetadata;
+
     return (
-        <FlexBox flexDirection="column" width="450px">
-            <Typography variant="h5">{title}</Typography>
+        <FlexBox flexDirection="column">
+            <IssueDetailsSection1 issueMetadata={issueMetadata} />
         </FlexBox>
     );
 })
