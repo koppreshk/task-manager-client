@@ -1,5 +1,5 @@
 import React from "react"
-import { MenuItem, Select, styled } from "@mui/material"
+import { MenuItem, Select, SelectChangeEvent, styled } from "@mui/material"
 import { IIssueDetailsProps } from "./issue-details"
 
 interface IIssueDetailsSection2Props extends IIssueDetailsProps { }
@@ -20,29 +20,33 @@ export const IssueDetailsSection2 = React.memo((props: IIssueDetailsSection2Prop
 
     const [selectedValue, setValue] = React.useState<string>(status);
 
+    const handleChange = React.useCallback((event: SelectChangeEvent<unknown>, child: React.ReactNode) => {
+        setValue(event.target.value as string)
+    }, []);
+
     return (
         <>
             <StyledSelect
-                labelId="demo-simple-select-autowidth"
-                id="demo-simple-select-autowidth"
                 value={selectedValue}
-                onChange={(ev) => setValue(ev.target.value as string)}>
+                onChange={handleChange}
+                renderValue={(value) => <><span>{value as string}</span></>}>
                 <MenuItem value={'new'}>
                     <span>New</span>
-                </MenuItem><MenuItem value="developmentInProgress">
-                    <span>Development In Progress</span>
+                </MenuItem>
+                <MenuItem value="developmentInProgress">
+                    <span>New {'-->'} Development In Progress</span>
                 </MenuItem>
                 <MenuItem value={'codeReview'}>
-                    <span>Code Review</span>
+                    <span>Development In Progress `{'->'}` Code Review</span>
                 </MenuItem>
                 <MenuItem value={'packaging'}>
-                    <span>Packaging</span>
+                    <span>Code Review `{'->'}` Packaging</span>
                 </MenuItem>
                 <MenuItem value={'qaInProgress'}>
-                    <span>QA In Progress</span>
+                    <span>Packaging `{'->'}` QA In Progress</span>
                 </MenuItem>
                 <MenuItem value={'readyForRelease'}>
-                    <span>Ready For Release</span>
+                    <span>QA In Progress `{'->'}` Ready For Release</span>
                 </MenuItem>
             </StyledSelect>
         </>

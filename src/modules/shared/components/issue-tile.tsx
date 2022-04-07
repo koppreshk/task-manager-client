@@ -58,26 +58,28 @@ export const IssueTile = React.memo((props: IIssueTileProps) => {
     }, []);
 
     return (
-        <StyledFlexBox flexDirection="column" gap="4px" onClick={toggleModel}>
-            <Typography variant="subtitle2" sx={{ wordBreak: 'break-word' }}>{title}</Typography>
-            <FlexBox gap="8px">
-                <Tooltip title={priority} arrow>
-                    {PriorityComponent}
-                </Tooltip>
-                <Tooltip title={`${dateDiffInDays} days in this column`} arrow>
-                    <AccessTimeIcon />
-                </Tooltip>
-                <Tooltip title={`Assignee: ${assignee}`} arrow>
-                    <Avatar sx={{ bgcolor: backgroundColor, color: textColor, width: 24, height: 24, fontSize: '12px', fontWeight: 600 }}>{intitals}</Avatar>
-                </Tooltip>
-            </FlexBox>
+        <>
+            <StyledFlexBox flexDirection="column" gap="4px" onClick={toggleModel}>
+                <Typography variant="subtitle2" sx={{ wordBreak: 'break-word' }}>{title}</Typography>
+                <FlexBox gap="8px">
+                    <Tooltip title={priority} arrow>
+                        {PriorityComponent}
+                    </Tooltip>
+                    <Tooltip title={`${dateDiffInDays} days in this column`} arrow>
+                        <AccessTimeIcon />
+                    </Tooltip>
+                    <Tooltip title={`Assignee: ${assignee}`} arrow>
+                        <Avatar sx={{ bgcolor: backgroundColor, color: textColor, width: 24, height: 24, fontSize: '12px', fontWeight: 600 }}>{intitals}</Avatar>
+                    </Tooltip>
+                </FlexBox>
+            </StyledFlexBox>
             <Modal
                 open={open}
                 onClose={toggleModel}>
                 <Box sx={style}>
-                    <IssueDetails issueMetadata={props}/>
+                    <IssueDetails issueMetadata={props} />
                 </Box>
             </Modal>
-        </StyledFlexBox>
+        </>
     )
 }) 
