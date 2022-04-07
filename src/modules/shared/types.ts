@@ -1,5 +1,6 @@
 export interface IIssuesTileMetaData {
     title: string;
+    status: string;
     description?: string;
     changeSetDetails?: string;
     codeReviewComments?: string;
