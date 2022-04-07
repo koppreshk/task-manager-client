@@ -1,9 +1,9 @@
 import React from "react"
 import styled from "styled-components";
 import { FlexBox } from "../../../common";
-import { HeaderWithCount } from "../../shared";
+import { HeaderWithCount } from "../../shared/components";
 import { INewIssuesData } from "../types";
-import { IssueTile } from "../../shared";
+import { IssueTile } from "../../shared/components";
 
 interface IListNewIssues {
     newIssues: INewIssuesData[];

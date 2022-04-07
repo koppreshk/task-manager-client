@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components";
 import { FlexBox } from "../../../common";
-import { HeaderWithCount, IssueTile } from "../../shared";
+import { HeaderWithCount, IssueTile } from "../../shared/components";
 import { IReadyForReleaseIssueData } from "../types";
 
 interface IReadyForReleaseIssues {

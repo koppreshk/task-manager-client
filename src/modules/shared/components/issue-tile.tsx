@@ -1,12 +1,13 @@
 import React from "react"
 import styled from "styled-components";
-import { Avatar, Tooltip, Typography } from "@mui/material";
-import { FlexBox, getDateDiffInDays, getNameInitials, chooseRandomColors } from "../../common";
+import { Avatar, Box, Modal, Tooltip, Typography } from "@mui/material";
+import { FlexBox, getDateDiffInDays, getNameInitials, chooseRandomColors } from "../../../common";
 import DensitySmallIcon from '@mui/icons-material/DensitySmall';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import { IIssuesTileMetaData } from "./types";
+import { IIssuesTileMetaData } from "../types";
+import { IssueDetails } from "./issue-details";
 
 interface IIssueTileProps extends IIssuesTileMetaData { }
 
@@ -17,7 +18,21 @@ const StyledFlexBox = styled(FlexBox)`
     padding: 10px;
     box-sizing: border-box;
     margin: 10px 10px 0px 10px;
+    cursor: pointer;
 `;
+
+const style = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 'calc(80% - 100px)',
+    height: 'calc(80% - 100px)',
+    bgcolor: 'background.paper',
+    boxShadow: 24,
+    p: 4,
+    outline: 'none'
+};
 
 const getPriorityIconComponent = (priority: string) => {
     switch (priority) {
@@ -36,9 +51,14 @@ export const IssueTile = React.memo((props: IIssueTileProps) => {
     const PriorityComponent = React.useMemo(() => getPriorityIconComponent(priority), [priority]);
     const dateDiffInDays = React.useMemo(() => getDateDiffInDays(new Date(createdAt ? createdAt : updatedAt), new Date()), [createdAt, updatedAt]);
     const { backgroundColor, textColor } = React.useMemo(() => chooseRandomColors(assignee), [assignee]);
+    const [open, setOpen] = React.useState(false);
+
+    const toggleModel = React.useCallback(() => {
+        setOpen((preValue) => !preValue);
+    }, []);
 
     return (
-        <StyledFlexBox flexDirection="column" gap="4px">
+        <StyledFlexBox flexDirection="column" gap="4px" onClick={toggleModel}>
             <Typography variant="subtitle2" sx={{ wordBreak: 'break-word' }}>{title}</Typography>
             <FlexBox gap="8px">
                 <Tooltip title={priority} arrow>
@@ -51,6 +71,13 @@ export const IssueTile = React.memo((props: IIssueTileProps) => {
                     <Avatar sx={{ bgcolor: backgroundColor, color: textColor, width: 24, height: 24, fontSize: '12px', fontWeight: 600 }}>{intitals}</Avatar>
                 </Tooltip>
             </FlexBox>
+            <Modal
+                open={open}
+                onClose={toggleModel}>
+                <Box sx={style}>
+                    <IssueDetails issueMetadata={props}/>
+                </Box>
+            </Modal>
         </StyledFlexBox>
     )
 }) 
