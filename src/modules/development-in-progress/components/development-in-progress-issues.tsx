@@ -22,7 +22,7 @@ export const DevelopmentInProgressIssues = React.memo((props: IDevelopmentInProg
     return (
         <StyledFlexBox flexDirection="column">
             <HeaderWithCount headerCount={developmentInProgressIssues.length} headerLabel="DEVELOPMENT IN PROGRESS" />
-            {developmentInProgressIssues.map((issue) => <IssueTile key={issue._id} {...issue} />)}
+            {developmentInProgressIssues.map((issue) => <IssueTile key={issue._id} issuesTileMetaData={issue} />)}
         </StyledFlexBox>
     )
 })

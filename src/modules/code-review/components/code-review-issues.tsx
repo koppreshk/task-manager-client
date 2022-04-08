@@ -22,7 +22,7 @@ export const CodeReviewIssues = React.memo((props: ICodeReviewIssues) => {
     return (
         <StyledFlexBox flexDirection="column">
             <HeaderWithCount headerCount={codeReviewIssues.length} headerLabel="CODE REVIEW" />
-            {codeReviewIssues.map((issue) => <IssueTile key={issue._id} {...issue} />)}
+            {codeReviewIssues.map((issue) => <IssueTile key={issue._id} issuesTileMetaData={issue} />)}
         </StyledFlexBox>
     )
 })

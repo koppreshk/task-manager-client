@@ -22,7 +22,7 @@ export const PackagingIssues = React.memo((props: IPackagingIssues) => {
     return (
         <StyledFlexBox flexDirection="column">
             <HeaderWithCount headerCount={packagingIssues.length} headerLabel="PACKAGING" />
-            {packagingIssues.map((issue) => <IssueTile key={issue._id} {...issue} />)}
+            {packagingIssues.map((issue) => <IssueTile key={issue._id} issuesTileMetaData={issue} />)}
         </StyledFlexBox>
     )
 })

@@ -23,7 +23,7 @@ export const NewIssues = React.memo((props: INewIssues) => {
     return (
         <StyledFlexBox flexDirection="column" alignItems="center">
             <HeaderWithCount headerCount={newIssues.length} headerLabel="NEW" />
-            {newIssues.map((issue) => <IssueTile key={issue._id} {...issue} />)}
+            {newIssues.map((issue) => <IssueTile key={issue._id} issuesTileMetaData={issue} />)}
         </StyledFlexBox>
     )
 })

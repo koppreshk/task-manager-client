@@ -22,7 +22,7 @@ export const QAInProgressIssues = React.memo((props: IQAInProgressIssues) => {
     return (
         <StyledFlexBox flexDirection="column">
             <HeaderWithCount headerCount={qaInProgressIssues.length} headerLabel="QA IN PROGRESS" />
-            {qaInProgressIssues.map((issue) => <IssueTile key={issue._id} {...issue} />)}
+            {qaInProgressIssues.map((issue) => <IssueTile key={issue._id} issuesTileMetaData={issue} />)}
         </StyledFlexBox>
     )
 })

@@ -9,7 +9,9 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { IIssuesTileMetaData } from "../types";
 import { IssueDetails } from "./issue-details";
 
-interface IIssueTileProps extends IIssuesTileMetaData { }
+interface IIssueTileProps {
+    issuesTileMetaData: IIssuesTileMetaData
+}
 
 const StyledFlexBox = styled(FlexBox)`
     width: calc(100% - 20px);
@@ -46,7 +48,8 @@ const getPriorityIconComponent = (priority: string) => {
 }
 
 export const IssueTile = React.memo((props: IIssueTileProps) => {
-    const { priority, title, createdAt, updatedAt, assignee } = props;
+    const { issuesTileMetaData } = props;
+    const { priority, title, createdAt, updatedAt, assignee } = issuesTileMetaData;
     const intitals = React.useMemo(() => getNameInitials(assignee), [assignee])
     const PriorityComponent = React.useMemo(() => getPriorityIconComponent(priority), [priority]);
     const dateDiffInDays = React.useMemo(() => getDateDiffInDays(new Date(createdAt ? createdAt : updatedAt), new Date()), [createdAt, updatedAt]);
@@ -77,7 +80,7 @@ export const IssueTile = React.memo((props: IIssueTileProps) => {
                 open={open}
                 onClose={toggleModel}>
                 <Box sx={style}>
-                    <IssueDetails issueMetadata={props} />
+                    <IssueDetails issueMetadata={issuesTileMetaData} />
                 </Box>
             </Modal>
         </>
