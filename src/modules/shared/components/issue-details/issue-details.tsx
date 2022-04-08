@@ -14,7 +14,7 @@ export const IssueDetails = React.memo((props: IIssueDetailsProps) => {
     return (
         <FlexBox flexDirection="row">
             <IssueDetailsSection1 issueMetadata={issueMetadata} />
-            <IssueDetailsSection2 issueMetadata={issueMetadata}/>
+            <IssueDetailsSection2 issueMetadata={issueMetadata} />
         </FlexBox>
     );
 })

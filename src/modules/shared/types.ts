@@ -21,3 +21,5 @@ export enum Statuses {
     qaInProgress = "QA In Progress",
     readyForRelease = "Ready For Release"
 }
+
+export type StatusesType = keyof typeof Statuses;
