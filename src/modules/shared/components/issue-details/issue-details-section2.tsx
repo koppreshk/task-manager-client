@@ -1,8 +1,13 @@
 import React from "react"
-import { MenuItem, Select, SelectChangeEvent, styled } from "@mui/material"
+import { MenuItem, Select, SelectChangeEvent, styled, Typography } from "@mui/material"
 import { IIssueDetailsProps } from "./issue-details"
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { FlexBox } from "../../../../common";
+import { Statuses } from "../../types";
 
 interface IIssueDetailsSection2Props extends IIssueDetailsProps { }
+
+type StatusesType = keyof typeof Statuses
 
 const StyledSelect = styled(Select)`
     width: 300px;
@@ -14,41 +19,72 @@ const StyledSelect = styled(Select)`
     }
 `;
 
+const statusItems: IStatusItemProps[] = [
+    {
+        currentStatusName: 'New',
+        targetStatusName: 'Development In Progress',
+        targetStatusValue: 'developmentInProgress'
+    },
+    {
+        currentStatusName: 'Development In Progress',
+        targetStatusName: 'Code Review',
+        targetStatusValue: 'codeReview'
+    },
+    {
+        currentStatusName: 'Code Review',
+        targetStatusName: 'Packaging',
+        targetStatusValue: 'packaging'
+    },
+    {
+        currentStatusName: 'Packaging',
+        targetStatusName: 'QA In Progress',
+        targetStatusValue: 'qaInProgress'
+    },
+    {
+        currentStatusName: 'QA In Progress',
+        targetStatusName: 'Ready For Release',
+        targetStatusValue: 'readyForRelease'
+    }
+]
+
 export const IssueDetailsSection2 = React.memo((props: IIssueDetailsSection2Props) => {
     const { issueMetadata } = props;
     const { status } = issueMetadata;
 
-    const [selectedValue, setValue] = React.useState<string>(status);
+    const [selectedValue, setValue] = React.useState<StatusesType>(status);
 
     const handleChange = React.useCallback((event: SelectChangeEvent<unknown>, child: React.ReactNode) => {
-        setValue(event.target.value as string)
+        setValue(event.target.value as StatusesType)
     }, []);
 
     return (
         <>
             <StyledSelect
-                value={selectedValue}
+                defaultValue={Statuses[selectedValue]}
                 onChange={handleChange}
-                renderValue={(value) => <><span>{value as string}</span></>}>
-                <MenuItem value={'new'}>
-                    <span>New</span>
-                </MenuItem>
-                <MenuItem value="developmentInProgress">
-                    <span>New {'-->'} Development In Progress</span>
-                </MenuItem>
-                <MenuItem value={'codeReview'}>
-                    <span>Development In Progress `{'->'}` Code Review</span>
-                </MenuItem>
-                <MenuItem value={'packaging'}>
-                    <span>Code Review `{'->'}` Packaging</span>
-                </MenuItem>
-                <MenuItem value={'qaInProgress'}>
-                    <span>Packaging `{'->'}` QA In Progress</span>
-                </MenuItem>
-                <MenuItem value={'readyForRelease'}>
-                    <span>QA In Progress `{'->'}` Ready For Release</span>
-                </MenuItem>
+                renderValue={(value) => <Typography>{Statuses[value as StatusesType]}</Typography>}>
+                {statusItems.map((status) =>
+                    <MenuItem value={status.targetStatusValue} key={status.targetStatusValue}>
+                        <StatusItem {...status} />
+                    </MenuItem>)}
             </StyledSelect>
         </>
     )
+})
+
+interface IStatusItemProps {
+    targetStatusValue: string;
+    currentStatusName: string;
+    targetStatusName: string;
+}
+
+const StatusItem = React.memo((props: IStatusItemProps) => {
+    const { currentStatusName, targetStatusName } = props;
+    return (
+        <FlexBox alignItems="center" gap="8px">
+            <span>{currentStatusName}</span>
+            <ArrowForwardIcon />
+            <span>{targetStatusName}</span>
+        </FlexBox>
+    );
 })
