@@ -3,6 +3,7 @@ import { CircularProgress } from "@mui/material";
 import { useQuery } from "react-query";
 import { useServiceClient } from "../../../common"
 import { DevelopmentInProgressIssues } from "../components";
+import { ReactQueryKeys } from "../../../react-query-enums";
 
 interface IDevelopmentInProgressIssuesContainer { }
 
@@ -16,7 +17,7 @@ export const DevelopmentInProgressIssuesContainer = React.memo((props: IDevelopm
             .catch(err => err);
     }, [getData]);
 
-    const { isLoading, data, error } = useQuery('getDevIssuesList', getDevIssuesList)
+    const { isLoading, data, error } = useQuery(ReactQueryKeys.GetAllDevIssues, getDevIssuesList)
 
     if (isLoading) {
         return (

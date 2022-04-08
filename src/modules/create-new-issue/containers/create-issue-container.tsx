@@ -1,7 +1,7 @@
 import React from "react"
 import { useMutation, useQueryClient } from "react-query";
 import { useServiceClient } from "../../../common";
-import { NewIssuesQueryName } from "../../new-issues/types";
+import { ReactQueryKeys } from "../../../react-query-enums";
 import { ICreateNewIssueBody } from "../api-body-types";
 import { CreateNewIssue } from "../components"
 
@@ -15,7 +15,7 @@ export const CreateIssueContainer = React.memo(() => {
 
     const mutation = useMutation('createNewIssue', onCreateNewIssue, {
         onSuccess: () => {
-            queryClient.invalidateQueries(NewIssuesQueryName.GetNewIssuesList)
+            queryClient.invalidateQueries(ReactQueryKeys.GetAllNewIssues)
         },
     })
 

@@ -3,6 +3,7 @@ import { CircularProgress } from "@mui/material";
 import { useQuery } from "react-query";
 import { useServiceClient } from "../../../common"
 import { ReadyForReleaseIssues } from "../components";
+import { ReactQueryKeys } from "../../../react-query-enums";
 
 interface IReadyForReleaseIssuesContainerProps { }
 
@@ -16,7 +17,7 @@ export const ReadyForReleaseIssuesContainer = React.memo((props: IReadyForReleas
             .catch(err => err);
     }, [getData]);
 
-    const { isLoading, data, error } = useQuery('getAllReadyForReleaseIssues', getAllReadyForReleaseIssues)
+    const { isLoading, data, error } = useQuery(ReactQueryKeys.GetAllReadyForReleaseIssues, getAllReadyForReleaseIssues)
 
     if (isLoading) {
         return (

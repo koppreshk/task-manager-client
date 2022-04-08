@@ -3,6 +3,7 @@ import { CircularProgress } from "@mui/material";
 import { useQuery } from "react-query";
 import { useServiceClient } from "../../../common"
 import { CodeReviewIssues } from "../components";
+import { ReactQueryKeys } from "../../../react-query-enums";
 
 interface ICodeReviewIssuesContainerProps { }
 
@@ -16,7 +17,7 @@ export const CodeReviewIssuesContainer = React.memo((props: ICodeReviewIssuesCon
             .catch(err => err);
     }, [getData]);
 
-    const { isLoading, data, error } = useQuery('getAllCodeReviewIssues', getAllCodeReviewIssues)
+    const { isLoading, data, error } = useQuery(ReactQueryKeys.GetAllCodeReviewIssues, getAllCodeReviewIssues)
 
     if (isLoading) {
         return (
