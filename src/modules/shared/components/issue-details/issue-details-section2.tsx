@@ -6,12 +6,12 @@ interface IIssueDetailsSection2Props extends IIssueDetailsProps { }
 
 
 export const IssueDetailsSection2 = React.memo((props: IIssueDetailsSection2Props) => {
-    const { issueMetadata } = props;
+    const { issueMetadata, invalidationKeys } = props;
     const { status, _id } = issueMetadata;
 
     return (
         <>
-            <ChangeStatusContainer status={status} invalidateQueryName='' _id={_id} />
+            <ChangeStatusContainer status={status} invalidateQueryNames={invalidationKeys} _id={_id} />
         </>
     )
 })

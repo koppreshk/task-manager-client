@@ -5,7 +5,7 @@ import { ChangeStatus } from "../components/issue-details/parts";
 import { StatusesType } from "../types";
 
 interface IChangeStatusContianerProps {
-    invalidateQueryName: string;
+    invalidateQueryNames?: string[];
     status: StatusesType;
     _id: string;
 }
@@ -47,7 +47,7 @@ const statusChangeEndPoints = {
 }
 
 export const ChangeStatusContainer = React.memo((props: IChangeStatusContianerProps) => {
-    const { invalidateQueryName, status, _id } = props;
+    const { invalidateQueryNames, status, _id } = props;
     const queryClient = useQueryClient();
     const { postData } = useServiceClient<{ id: string }>();
     const [selectedValue, setValue] = React.useState<string>(status);
@@ -60,7 +60,7 @@ export const ChangeStatusContainer = React.memo((props: IChangeStatusContianerPr
 
     const mutation = useMutation('changeStatus', onChangeStatus, {
         onSuccess: () => {
-            queryClient.invalidateQueries(invalidateQueryName)
+            invalidateQueryNames?.forEach((queryName) => queryClient.invalidateQueries(queryName))
         },
         onError: (err) => alert(err)
     })

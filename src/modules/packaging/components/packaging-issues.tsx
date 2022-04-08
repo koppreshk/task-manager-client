@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "styled-components";
 import { FlexBox } from "../../../common";
+import { ReactQueryKeys } from "../../../react-query-enums";
 import { HeaderWithCount, IssueTile } from "../../shared/components";
 import { IPackagingIssueData } from "../types";
 
@@ -22,7 +23,7 @@ export const PackagingIssues = React.memo((props: IPackagingIssues) => {
     return (
         <StyledFlexBox flexDirection="column">
             <HeaderWithCount headerCount={packagingIssues.length} headerLabel="PACKAGING" />
-            {packagingIssues.map((issue) => <IssueTile key={issue._id} issuesTileMetaData={issue} />)}
+            {packagingIssues.map((issue) => <IssueTile key={issue._id} issuesTileMetaData={issue} invalidationKeys={[ReactQueryKeys.GetAllPackagingIssues, ReactQueryKeys.GetAllReadyForReleaseIssues]} />)}
         </StyledFlexBox>
     )
 })

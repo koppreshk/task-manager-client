@@ -4,6 +4,7 @@ import { FlexBox } from "../../../common";
 import { HeaderWithCount } from "../../shared/components";
 import { INewIssuesData } from "../types";
 import { IssueTile } from "../../shared/components";
+import { ReactQueryKeys } from "../../../react-query-enums";
 
 interface INewIssues {
     newIssues: INewIssuesData[];
@@ -23,7 +24,7 @@ export const NewIssues = React.memo((props: INewIssues) => {
     return (
         <StyledFlexBox flexDirection="column" alignItems="center">
             <HeaderWithCount headerCount={newIssues.length} headerLabel="NEW" />
-            {newIssues.map((issue) => <IssueTile key={issue._id} issuesTileMetaData={issue} />)}
+            {newIssues.map((issue) => <IssueTile key={issue._id} issuesTileMetaData={issue} invalidationKeys={[ReactQueryKeys.GetAllNewIssues, ReactQueryKeys.GetAllDevIssues]} />)}
         </StyledFlexBox>
     )
 })

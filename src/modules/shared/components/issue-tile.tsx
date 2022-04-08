@@ -10,7 +10,8 @@ import { IIssuesTileMetaData } from "../types";
 import { IssueDetails } from "./issue-details";
 
 interface IIssueTileProps {
-    issuesTileMetaData: IIssuesTileMetaData
+    issuesTileMetaData: IIssuesTileMetaData;
+    invalidationKeys?: string[];
 }
 
 const StyledFlexBox = styled(FlexBox)`
@@ -48,7 +49,7 @@ const getPriorityIconComponent = (priority: string) => {
 }
 
 export const IssueTile = React.memo((props: IIssueTileProps) => {
-    const { issuesTileMetaData } = props;
+    const { issuesTileMetaData, invalidationKeys } = props;
     const { priority, title, createdAt, updatedAt, assignee } = issuesTileMetaData;
     const intitals = React.useMemo(() => getNameInitials(assignee), [assignee])
     const PriorityComponent = React.useMemo(() => getPriorityIconComponent(priority), [priority]);
@@ -80,7 +81,7 @@ export const IssueTile = React.memo((props: IIssueTileProps) => {
                 open={open}
                 onClose={toggleModel}>
                 <Box sx={style}>
-                    <IssueDetails issueMetadata={issuesTileMetaData} />
+                    <IssueDetails issueMetadata={issuesTileMetaData} invalidationKeys={invalidationKeys} />
                 </Box>
             </Modal>
         </>

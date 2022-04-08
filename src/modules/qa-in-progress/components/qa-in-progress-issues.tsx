@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "styled-components";
 import { FlexBox } from "../../../common";
+import { ReactQueryKeys } from "../../../react-query-enums";
 import { HeaderWithCount, IssueTile } from "../../shared/components";
 import { IQAInProgressIssueData } from "../types";
 
@@ -22,7 +23,7 @@ export const QAInProgressIssues = React.memo((props: IQAInProgressIssues) => {
     return (
         <StyledFlexBox flexDirection="column">
             <HeaderWithCount headerCount={qaInProgressIssues.length} headerLabel="QA IN PROGRESS" />
-            {qaInProgressIssues.map((issue) => <IssueTile key={issue._id} issuesTileMetaData={issue} />)}
+            {qaInProgressIssues.map((issue) => <IssueTile key={issue._id} issuesTileMetaData={issue} invalidationKeys={[ReactQueryKeys.GetAllQAInProgressIssues, ReactQueryKeys.GetAllPackagingIssues]} />)}
         </StyledFlexBox>
     )
 })
