@@ -2,11 +2,13 @@ import React from "react"
 import { CircularProgress } from "@mui/material";
 import { useQuery } from "react-query";
 import { useServiceClient } from "../../../common"
-import { ListNewIssues } from "../components";
+import { NewIssues } from "../components";
+import { NewIssuesQueryName } from "../types";
 
-interface INewListIssuesContainerProps { }
+interface INewIssuesContainerProps { }
 
-export const ListNewIssuesContainer = React.memo((props: INewListIssuesContainerProps) => {
+
+export const NewIssuesContainer = React.memo((props: INewIssuesContainerProps) => {
     const { getData } = useServiceClient();
 
     const getNewIssuesList = React.useCallback(() => {
@@ -16,7 +18,7 @@ export const ListNewIssuesContainer = React.memo((props: INewListIssuesContainer
             .catch(err => err);
     }, [getData]);
 
-    const { isLoading, data, error } = useQuery('getNewIssuesList', getNewIssuesList)
+    const { isLoading, data, error } = useQuery(NewIssuesQueryName.GetNewIssuesList, getNewIssuesList)
 
     if (isLoading) {
         return (
@@ -26,7 +28,7 @@ export const ListNewIssuesContainer = React.memo((props: INewListIssuesContainer
 
     if (data) {
         return (
-            <ListNewIssues newIssues={data} />
+            <NewIssues newIssues={data} />
         )
     }
 

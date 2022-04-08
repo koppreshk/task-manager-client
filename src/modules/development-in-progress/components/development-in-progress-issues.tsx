@@ -4,7 +4,7 @@ import { FlexBox } from "../../../common";
 import { HeaderWithCount, IssueTile } from "../../shared/components";
 import { IDevelopmentInProgressIssuesData } from "../types";
 
-interface IListDevelopmentInProgressIssues {
+interface IDevelopmentInProgressIssuesProps {
     developmentInProgressIssues: IDevelopmentInProgressIssuesData[];
 }
 
@@ -16,7 +16,7 @@ const StyledFlexBox = styled(FlexBox)`
     overflow: auto;
 `;
 
-export const ListDevelopmentInProgressIssues = React.memo((props: IListDevelopmentInProgressIssues) => {
+export const DevelopmentInProgressIssues = React.memo((props: IDevelopmentInProgressIssuesProps) => {
     const { developmentInProgressIssues } = props;
 
     return (

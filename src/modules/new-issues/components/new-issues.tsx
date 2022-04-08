@@ -5,7 +5,7 @@ import { HeaderWithCount } from "../../shared/components";
 import { INewIssuesData } from "../types";
 import { IssueTile } from "../../shared/components";
 
-interface IListNewIssues {
+interface INewIssues {
     newIssues: INewIssuesData[];
 }
 
@@ -17,7 +17,7 @@ const StyledFlexBox = styled(FlexBox)`
     overflow: auto;
 `;
 
-export const ListNewIssues = React.memo((props: IListNewIssues) => {
+export const NewIssues = React.memo((props: INewIssues) => {
     const { newIssues } = props;
 
     return (

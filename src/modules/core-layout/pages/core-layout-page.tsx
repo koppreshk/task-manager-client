@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { FlexBox } from "../../../common";
 import { CodeReviewIssuesContainer } from "../../code-review/containers";
 import { CreateIssueContainer } from "../../create-new-issue/containers";
-import { ListDevelopmentInProgressIssuesContainer } from "../../development-in-progress/containers";
-import { ListNewIssuesContainer } from "../../new-issues/containers";
+import { DevelopmentInProgressIssuesContainer } from "../../development-in-progress/containers";
+import { NewIssuesContainer } from "../../new-issues/containers";
 import { PackagingIssuesContainer } from "../../packaging/containers";
 import { QAInProgressIssuesContainer } from "../../qa-in-progress/containers";
 import { ReadyForReleaseIssuesContainer } from "../../ready-for-release/containers";
@@ -23,8 +23,8 @@ export const CoreLayout = React.memo(() => {
         <StyledFlexBox flexDirection="column" gap="10px">
             <CreateIssueContainer />
             <IssueContainerWrapper flexDirection="row" gap="10px">
-                <ListNewIssuesContainer />
-                <ListDevelopmentInProgressIssuesContainer />
+                <NewIssuesContainer />
+                <DevelopmentInProgressIssuesContainer />
                 <CodeReviewIssuesContainer />
                 <PackagingIssuesContainer />
                 <QAInProgressIssuesContainer />

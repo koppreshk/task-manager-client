@@ -2,11 +2,11 @@ import React from "react"
 import { CircularProgress } from "@mui/material";
 import { useQuery } from "react-query";
 import { useServiceClient } from "../../../common"
-import { ListDevelopmentInProgressIssues } from "../components";
+import { DevelopmentInProgressIssues } from "../components";
 
-interface IListDevelopmentInProgressIssuesContainer { }
+interface IDevelopmentInProgressIssuesContainer { }
 
-export const ListDevelopmentInProgressIssuesContainer = React.memo((props: IListDevelopmentInProgressIssuesContainer) => {
+export const DevelopmentInProgressIssuesContainer = React.memo((props: IDevelopmentInProgressIssuesContainer) => {
     const { getData } = useServiceClient();
 
     const getDevIssuesList = React.useCallback(() => {
@@ -26,7 +26,7 @@ export const ListDevelopmentInProgressIssuesContainer = React.memo((props: IList
 
     if (data) {
         return (
-            <ListDevelopmentInProgressIssues developmentInProgressIssues={data} />
+            <DevelopmentInProgressIssues developmentInProgressIssues={data} />
         )
     }
 
