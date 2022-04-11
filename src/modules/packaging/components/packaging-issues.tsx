@@ -32,7 +32,7 @@ export const PackagingIssues = React.memo((props: IPackagingIssues) => {
                         targetStatusName: 'QA In Progress',
                         targetStatusValue: 'qaInProgress'
                     }]}
-                    invalidationKeys={[ReactQueryKeys.GetAllPackagingIssues, ReactQueryKeys.GetAllReadyForReleaseIssues]} />)}
+                    invalidationKeys={[ReactQueryKeys.GetAllPackagingIssues, ReactQueryKeys.GetAllQAInProgressIssues]} />)}
         </StyledFlexBox>
     )
 })
