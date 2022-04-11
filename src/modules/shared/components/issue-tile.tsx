@@ -43,14 +43,14 @@ const style = {
     outline: 'none'
 };
 
-const getPriorityIconComponent = (priority: string) => {
+export const getPriorityIconComponent = (priority: string) => {
     switch (priority) {
         case 'medium':
-            return <DensitySmallIcon titleAccess="Medium Priority" sx={{ color: '#15e9e6' }} />
+            return <DensitySmallIcon sx={{ color: '#15e9e6' }} />
         case 'high':
-            return <ArrowUpwardIcon titleAccess="High Priority" sx={{ color: '#e91515' }} />
+            return <ArrowUpwardIcon sx={{ color: '#e91515' }} />
         default:
-            return <ArrowDownwardIcon titleAccess="Low Priority" sx={{ color: '#26c43b' }} />
+            return <ArrowDownwardIcon sx={{ color: '#26c43b' }} />
     }
 }
 

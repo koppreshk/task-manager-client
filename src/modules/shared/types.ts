@@ -7,7 +7,7 @@ export interface IIssuesTileMetaData {
     qaComments: string;
     assignee: string;
     reporter: string;
-    priority: string;
+    priority: 'low' | 'medium' | 'high';
     createdAt?: string;
     updatedAt: string;
     _id: string;
