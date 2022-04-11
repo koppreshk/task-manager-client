@@ -23,7 +23,16 @@ export const PackagingIssues = React.memo((props: IPackagingIssues) => {
     return (
         <StyledFlexBox flexDirection="column">
             <HeaderWithCount headerCount={packagingIssues.length} headerLabel="PACKAGING" />
-            {packagingIssues.map((issue) => <IssueTile key={issue._id} issuesTileMetaData={issue} invalidationKeys={[ReactQueryKeys.GetAllPackagingIssues, ReactQueryKeys.GetAllReadyForReleaseIssues]} />)}
+            {packagingIssues.map((issue) =>
+                <IssueTile
+                    key={issue._id}
+                    issuesTileMetaData={issue}
+                    changeStatusItem={[{
+                        currentStatusName: 'Packaging',
+                        targetStatusName: 'QA In Progress',
+                        targetStatusValue: 'qaInProgress'
+                    }]}
+                    invalidationKeys={[ReactQueryKeys.GetAllPackagingIssues, ReactQueryKeys.GetAllReadyForReleaseIssues]} />)}
         </StyledFlexBox>
     )
 })

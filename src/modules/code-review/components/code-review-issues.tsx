@@ -23,7 +23,18 @@ export const CodeReviewIssues = React.memo((props: ICodeReviewIssues) => {
     return (
         <StyledFlexBox flexDirection="column">
             <HeaderWithCount headerCount={codeReviewIssues.length} headerLabel="CODE REVIEW" />
-            {codeReviewIssues.map((issue) => <IssueTile key={issue._id} issuesTileMetaData={issue} invalidationKeys={[ReactQueryKeys.GetAllCodeReviewIssues, ReactQueryKeys.GetAllQAInProgressIssues]} />)}
+            {codeReviewIssues.map((issue) =>
+                <IssueTile
+                    key={issue._id}
+                    issuesTileMetaData={issue}
+                    changeStatusItem={[
+                        {
+                            currentStatusName: 'Code Review',
+                            targetStatusName: 'Packaging',
+                            targetStatusValue: 'packaging'
+                        }
+                    ]}
+                    invalidationKeys={[ReactQueryKeys.GetAllCodeReviewIssues, ReactQueryKeys.GetAllQAInProgressIssues]} />)}
         </StyledFlexBox>
     )
 })

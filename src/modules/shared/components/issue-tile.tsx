@@ -9,9 +9,15 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { IIssuesTileMetaData } from "../types";
 import { IssueDetails } from "./issue-details";
 
-interface IIssueTileProps {
+export interface IChangeStatusItem {
+    currentStatusName: string;
+    targetStatusName: string;
+    targetStatusValue: string;
+}
+export interface IIssueTileProps {
     issuesTileMetaData: IIssuesTileMetaData;
     invalidationKeys?: string[];
+    changeStatusItem?: IChangeStatusItem[]
 }
 
 const StyledFlexBox = styled(FlexBox)`
@@ -49,7 +55,7 @@ const getPriorityIconComponent = (priority: string) => {
 }
 
 export const IssueTile = React.memo((props: IIssueTileProps) => {
-    const { issuesTileMetaData, invalidationKeys } = props;
+    const { issuesTileMetaData, invalidationKeys, changeStatusItem } = props;
     const { priority, title, createdAt, updatedAt, assignee } = issuesTileMetaData;
     const intitals = React.useMemo(() => getNameInitials(assignee), [assignee])
     const PriorityComponent = React.useMemo(() => getPriorityIconComponent(priority), [priority]);
@@ -81,7 +87,7 @@ export const IssueTile = React.memo((props: IIssueTileProps) => {
                 open={open}
                 onClose={toggleModel}>
                 <Box sx={style}>
-                    <IssueDetails issueMetadata={issuesTileMetaData} invalidationKeys={invalidationKeys} />
+                    <IssueDetails issuesTileMetaData={issuesTileMetaData} invalidationKeys={invalidationKeys} changeStatusItem={changeStatusItem} />
                 </Box>
             </Modal>
         </>

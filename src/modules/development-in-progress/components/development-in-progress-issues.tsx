@@ -27,6 +27,13 @@ export const DevelopmentInProgressIssues = React.memo((props: IDevelopmentInProg
                 <IssueTile
                     key={issue._id}
                     issuesTileMetaData={issue}
+                    changeStatusItem={[
+                        {
+                            currentStatusName: 'Development In Progress',
+                            targetStatusName: 'Code Review',
+                            targetStatusValue: 'codeReview'
+                        }
+                    ]}
                     invalidationKeys={[ReactQueryKeys.GetAllDevIssues, ReactQueryKeys.GetAllCodeReviewIssues]} />)}
         </StyledFlexBox>
     )

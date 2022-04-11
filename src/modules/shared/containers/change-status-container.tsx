@@ -1,42 +1,16 @@
 import React from "react"
 import { useMutation, useQueryClient } from "react-query";
 import { useServiceClient } from "../../../common";
+import { IChangeStatusItem } from "../components";
 import { ChangeStatus } from "../components/issue-details/parts";
 import { StatusesType } from "../types";
 
 interface IChangeStatusContianerProps {
     invalidateQueryNames?: string[];
+    changeStatusItem: IChangeStatusItem[];
     status: StatusesType;
     _id: string;
 }
-
-const statusItems = [
-    {
-        currentStatusName: 'New',
-        targetStatusName: 'Development In Progress',
-        targetStatusValue: 'developmentInProgress'
-    },
-    {
-        currentStatusName: 'Development In Progress',
-        targetStatusName: 'Code Review',
-        targetStatusValue: 'codeReview'
-    },
-    {
-        currentStatusName: 'Code Review',
-        targetStatusName: 'Packaging',
-        targetStatusValue: 'packaging'
-    },
-    {
-        currentStatusName: 'Packaging',
-        targetStatusName: 'QA In Progress',
-        targetStatusValue: 'qaInProgress'
-    },
-    {
-        currentStatusName: 'QA In Progress',
-        targetStatusName: 'Ready For Release',
-        targetStatusValue: 'readyForRelease'
-    }
-]
 
 const statusChangeEndPoints = {
     developmentInProgress: 'newIssues/moveNewToDev',
@@ -47,7 +21,7 @@ const statusChangeEndPoints = {
 }
 
 export const ChangeStatusContainer = React.memo((props: IChangeStatusContianerProps) => {
-    const { invalidateQueryNames, status, _id } = props;
+    const { changeStatusItem, invalidateQueryNames, status, _id } = props;
     const queryClient = useQueryClient();
     const { postData } = useServiceClient<{ id: string }>();
     const [selectedValue, setValue] = React.useState<string>(status);
@@ -72,7 +46,7 @@ export const ChangeStatusContainer = React.memo((props: IChangeStatusContianerPr
 
     return (
         <ChangeStatus
-            statusItems={statusItems}
+            statusItems={changeStatusItem}
             selectedValue={selectedValue}
             handleSelectValueChange={handleSelectValueChange} />
     )

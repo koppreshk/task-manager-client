@@ -19,8 +19,8 @@ const SubHeaderValue = styled(Typography)`
 `;
 
 export const IssueDetailsSection1 = React.memo((props: IIssueDetailsSection1Props) => {
-    const { issueMetadata } = props;
-    const { title, description, changeSetDetails, qaComments, codeReviewComments } = issueMetadata;
+    const { issuesTileMetaData } = props;
+    const { title, description, changeSetDetails, qaComments, codeReviewComments } = issuesTileMetaData;
 
     return (
         <FlexBox flexDirection="column" gap="10px" width="70%">
