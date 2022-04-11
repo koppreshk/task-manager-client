@@ -3,6 +3,7 @@ import { CircularProgress } from "@mui/material";
 import { useQuery } from "react-query";
 import { useServiceClient } from "../../../common"
 import { PackagingIssues } from "../components";
+import { ReactQueryKeys } from "../../../react-query-enums";
 
 interface IPackagingIssuesContainerProps { }
 
@@ -16,7 +17,7 @@ export const PackagingIssuesContainer = React.memo((props: IPackagingIssuesConta
             .catch(err => err);
     }, [getData]);
 
-    const { isLoading, data, error } = useQuery('getAllPackagingIssues', getAllPackagingIssues)
+    const { isLoading, data, error } = useQuery(ReactQueryKeys.GetAllPackagingIssues, getAllPackagingIssues)
 
     if (isLoading) {
         return (

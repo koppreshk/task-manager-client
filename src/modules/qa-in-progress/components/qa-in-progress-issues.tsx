@@ -1,7 +1,8 @@
 import React from "react"
 import styled from "styled-components";
 import { FlexBox } from "../../../common";
-import { HeaderWithCount, IssueTile } from "../../shared";
+import { ReactQueryKeys } from "../../../react-query-enums";
+import { HeaderWithCount, IssueTile } from "../../shared/components";
 import { IQAInProgressIssueData } from "../types";
 
 interface IQAInProgressIssues {
@@ -22,7 +23,16 @@ export const QAInProgressIssues = React.memo((props: IQAInProgressIssues) => {
     return (
         <StyledFlexBox flexDirection="column">
             <HeaderWithCount headerCount={qaInProgressIssues.length} headerLabel="QA IN PROGRESS" />
-            {qaInProgressIssues.map((issue) => <IssueTile key={issue._id} {...issue} />)}
+            {qaInProgressIssues.map((issue) =>
+                <IssueTile
+                    key={issue._id}
+                    issuesTileMetaData={issue}
+                    changeStatusItem={[{
+                        currentStatusName: 'QA In Progress',
+                        targetStatusName: 'Ready For Release',
+                        targetStatusValue: 'readyForRelease'
+                    }]}
+                    invalidationKeys={[ReactQueryKeys.GetAllQAInProgressIssues, ReactQueryKeys.GetAllReadyForReleaseIssues]} />)}
         </StyledFlexBox>
     )
 })

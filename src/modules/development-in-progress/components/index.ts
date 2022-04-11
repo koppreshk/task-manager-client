@@ -1,1 +1,1 @@
-export * from './list-development-in-progress-issues';
+export * from './development-in-progress-issues';

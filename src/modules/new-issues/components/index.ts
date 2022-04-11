@@ -1,1 +1,1 @@
-export * from './list-new-issues';
+export * from './new-issues';

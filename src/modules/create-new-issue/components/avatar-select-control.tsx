@@ -16,7 +16,7 @@ interface ISelectControlProps {
 
 export const SelectAvatarControl = React.memo((props: ISelectControlProps) => {
     const { label, users, selectedValue, onSelectValueChange } = props
-    console.log(selectedValue);
+
     const handleChange = React.useCallback((event: SelectChangeEvent<typeof selectedValue>) => {
         onSelectValueChange(label.toLowerCase(), event.target.value);
     }, [label, onSelectValueChange]);

@@ -1,7 +1,8 @@
 import React from "react"
 import styled from "styled-components";
 import { FlexBox } from "../../../common";
-import { HeaderWithCount, IssueTile } from "../../shared";
+import { ReactQueryKeys } from "../../../react-query-enums";
+import { HeaderWithCount, IssueTile } from "../../shared/components";
 import { ICodeReviewIssueData } from "../types";
 
 interface ICodeReviewIssues {
@@ -22,7 +23,18 @@ export const CodeReviewIssues = React.memo((props: ICodeReviewIssues) => {
     return (
         <StyledFlexBox flexDirection="column">
             <HeaderWithCount headerCount={codeReviewIssues.length} headerLabel="CODE REVIEW" />
-            {codeReviewIssues.map((issue) => <IssueTile key={issue._id} {...issue} />)}
+            {codeReviewIssues.map((issue) =>
+                <IssueTile
+                    key={issue._id}
+                    issuesTileMetaData={issue}
+                    changeStatusItem={[
+                        {
+                            currentStatusName: 'Code Review',
+                            targetStatusName: 'Packaging',
+                            targetStatusValue: 'packaging'
+                        }
+                    ]}
+                    invalidationKeys={[ReactQueryKeys.GetAllCodeReviewIssues, ReactQueryKeys.GetAllPackagingIssues]} />)}
         </StyledFlexBox>
     )
 })
