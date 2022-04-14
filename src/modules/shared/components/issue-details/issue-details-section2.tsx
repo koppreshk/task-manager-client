@@ -1,11 +1,11 @@
 import React from "react"
-import { IIssueDetailsProps } from "./issue-details"
 import { ChangeStatusContainer } from "../../containers";
 import { Typography } from "@mui/material";
 import { MoreDetails } from "./parts/more-details";
 import { FlexBox } from "../../../../common";
+import { IIssueTileProps } from "../issue-tile";
 
-interface IIssueDetailsSection2Props extends IIssueDetailsProps { }
+interface IIssueDetailsSection2Props extends IIssueTileProps { }
 
 
 export const IssueDetailsSection2 = React.memo((props: IIssueDetailsSection2Props) => {

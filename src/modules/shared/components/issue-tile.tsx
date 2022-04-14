@@ -7,7 +7,7 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { IIssuesTileMetaData } from "../types";
-import { IssueDetails } from "./issue-details";
+import { UpdateIssueDetailsContainer } from "../containers";
 
 export interface IChangeStatusItem {
     currentStatusName: string;
@@ -87,7 +87,10 @@ export const IssueTile = React.memo((props: IIssueTileProps) => {
                 open={open}
                 onClose={toggleModel}>
                 <Box sx={style}>
-                    <IssueDetails issuesTileMetaData={issuesTileMetaData} invalidationKeys={invalidationKeys} changeStatusItem={changeStatusItem} />
+                    <UpdateIssueDetailsContainer
+                        issuesTileMetaData={issuesTileMetaData}
+                        invalidationKeys={invalidationKeys}
+                        changeStatusItem={changeStatusItem} />
                 </Box>
             </Modal>
         </>
