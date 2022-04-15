@@ -1,7 +1,7 @@
 import React from "react"
 import { Typography } from "@mui/material";
 import styled from "styled-components";
-import { FlexBox, UserAvatar } from "../../../../../common";
+import { FlexBox, UserAvatar } from "common";
 import { IIssuesTileMetaData } from "../../../types";
 import { GridLayout } from "../../../../../common/grid-layout";
 import { getPriorityIconComponent } from "../../issue-tile";
