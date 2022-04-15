@@ -5,7 +5,7 @@ import { ITaskMetadata } from "../types";
 import { CircularProgress } from '@mui/material';
 import { useServiceClient } from "../common";
 
-export const GetTaskListContainer = () => {
+export const GetTaskListContainer = React.memo(() => {
     const { getData } = useServiceClient();
     const { isLoading, data, error } = useQuery('getTaskList', () => {
         return getData('/api/v1/tasks/getAllTasks')
@@ -29,4 +29,4 @@ export const GetTaskListContainer = () => {
     }
 
     return <span>Error: {error}</span>
-}
+})

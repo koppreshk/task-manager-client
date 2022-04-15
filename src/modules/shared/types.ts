@@ -4,10 +4,10 @@ export interface IIssuesTileMetaData {
     description?: string;
     changeSetDetails?: string;
     codeReviewComments?: string;
-    qaComments: string;
+    qaComments?: string;
     assignee: string;
     reporter: string;
-    priority: string;
+    priority: 'low' | 'medium' | 'high';
     createdAt?: string;
     updatedAt: string;
     _id: string;
