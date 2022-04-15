@@ -1,12 +1,11 @@
 import React from "react";
 import { Button } from "@mui/material";
 import { FlexBox } from "../../../../common";
-import { IIssueTileProps } from "../issue-tile";
 import { IssueDetailsSection1 } from "./issue-details-section1";
 import { IssueDetailsSection2 } from "./issue-details-section2";
-import { IBodyArgs } from "../../containers";
+import { IBodyArgs, IUpdateIssueDetailsContaionerProps } from "../../containers";
 
-export interface IIssueDetailsProps extends IIssueTileProps {
+export interface IIssueDetailsProps extends IUpdateIssueDetailsContaionerProps {
     onUpdateIssueDetails: (body: IBodyArgs) => Promise<Response>
 }
 
@@ -54,7 +53,7 @@ const intialState: IState = {
 }
 
 export const IssueDetails = React.memo((props: IIssueDetailsProps) => {
-    const { issuesTileMetaData, invalidationKeys, changeStatusItem, onUpdateIssueDetails } = props;
+    const { issuesTileMetaData, invalidationKeys, changeStatusItems, onUpdateIssueDetails } = props;
     const [state, dispatch] = React.useReducer(reducer, intialState);
 
     const onSubmitHandler = React.useCallback(() => {
@@ -71,7 +70,7 @@ export const IssueDetails = React.memo((props: IIssueDetailsProps) => {
                 <IssueDetailsSection2
                     issuesTileMetaData={issuesTileMetaData}
                     invalidationKeys={invalidationKeys}
-                    changeStatusItem={changeStatusItem} />
+                    changeStatusItems={changeStatusItems} />
             </FlexBox>
             <Button
                 sx={{ width: '200px', position: 'absolute', right: '32px', bottom: '32px' }}

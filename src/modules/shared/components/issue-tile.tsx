@@ -1,13 +1,13 @@
 import React from "react"
 import styled from "styled-components";
-import { Avatar, Box, Modal, Tooltip, Typography } from "@mui/material";
+import { Avatar, Tooltip, Typography } from "@mui/material";
 import { FlexBox, getDateDiffInDays, getNameInitials, chooseRandomColors } from "../../../common";
 import DensitySmallIcon from '@mui/icons-material/DensitySmall';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { IIssuesTileMetaData } from "../types";
-import { UpdateIssueDetailsContainer } from "../containers";
+import { useNavigate } from "react-router-dom";
 
 export interface IChangeStatusItem {
     currentStatusName: string;
@@ -16,8 +16,6 @@ export interface IChangeStatusItem {
 }
 export interface IIssueTileProps {
     issuesTileMetaData: IIssuesTileMetaData;
-    invalidationKeys?: string[];
-    changeStatusItem?: IChangeStatusItem[]
 }
 
 const StyledFlexBox = styled(FlexBox)`
@@ -29,19 +27,6 @@ const StyledFlexBox = styled(FlexBox)`
     margin: 10px 10px 0px 10px;
     cursor: pointer;
 `;
-
-const style = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 'calc(80% - 100px)',
-    height: 'calc(80% - 100px)',
-    bgcolor: 'background.paper',
-    boxShadow: 24,
-    p: 4,
-    outline: 'none'
-};
 
 export const getPriorityIconComponent = (priority: string) => {
     switch (priority) {
@@ -55,21 +40,21 @@ export const getPriorityIconComponent = (priority: string) => {
 }
 
 export const IssueTile = React.memo((props: IIssueTileProps) => {
-    const { issuesTileMetaData, invalidationKeys, changeStatusItem } = props;
-    const { priority, title, createdAt, updatedAt, assignee } = issuesTileMetaData;
+    const { issuesTileMetaData } = props;
+    const { priority, title, createdAt, updatedAt, assignee, status, _id } = issuesTileMetaData;
     const intitals = React.useMemo(() => getNameInitials(assignee), [assignee])
     const PriorityComponent = React.useMemo(() => getPriorityIconComponent(priority), [priority]);
     const dateDiffInDays = React.useMemo(() => getDateDiffInDays(new Date(createdAt ? createdAt : updatedAt), new Date()), [createdAt, updatedAt]);
     const { backgroundColor, textColor } = React.useMemo(() => chooseRandomColors(assignee), [assignee]);
-    const [open, setOpen] = React.useState(false);
+    const navigate = useNavigate();
 
-    const toggleModel = React.useCallback(() => {
-        setOpen((preValue) => !preValue);
-    }, []);
+    const onIssueTileClick = React.useCallback(() => {
+        navigate(`/${status}/${_id}`);
+    }, [_id, navigate, status]);
 
     return (
         <>
-            <StyledFlexBox flexDirection="column" gap="4px" onClick={toggleModel}>
+            <StyledFlexBox flexDirection="column" gap="4px" onClick={onIssueTileClick}>
                 <Typography variant="subtitle2" sx={{ wordBreak: 'break-word' }}>{title}</Typography>
                 <FlexBox gap="8px">
                     <Tooltip title={priority} arrow>
@@ -83,16 +68,6 @@ export const IssueTile = React.memo((props: IIssueTileProps) => {
                     </Tooltip>
                 </FlexBox>
             </StyledFlexBox>
-            <Modal
-                open={open}
-                onClose={toggleModel}>
-                <Box sx={style}>
-                    <UpdateIssueDetailsContainer
-                        issuesTileMetaData={issuesTileMetaData}
-                        invalidationKeys={invalidationKeys}
-                        changeStatusItem={changeStatusItem} />
-                </Box>
-            </Modal>
         </>
     )
 }) 

@@ -1,7 +1,6 @@
 import React from "react"
 import styled from "styled-components";
 import { FlexBox } from "../../../common";
-import { ReactQueryKeys } from "../../../react-query-enums";
 import { HeaderWithCount, IssueTile } from "../../shared/components";
 import { IDevelopmentInProgressIssuesData } from "../types";
 
@@ -26,15 +25,7 @@ export const DevelopmentInProgressIssues = React.memo((props: IDevelopmentInProg
             {developmentInProgressIssues.map((issue) =>
                 <IssueTile
                     key={issue._id}
-                    issuesTileMetaData={issue}
-                    changeStatusItem={[
-                        {
-                            currentStatusName: 'Development In Progress',
-                            targetStatusName: 'Code Review',
-                            targetStatusValue: 'codeReview'
-                        }
-                    ]}
-                    invalidationKeys={[ReactQueryKeys.GetAllDevIssues, ReactQueryKeys.GetAllCodeReviewIssues]} />)}
+                    issuesTileMetaData={issue} />)}
         </StyledFlexBox>
     )
 })
