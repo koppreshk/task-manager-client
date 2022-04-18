@@ -1,5 +1,5 @@
 import React from "react";
-import { useServiceClient } from "common";
+import { FlexBox, useServiceClient } from "common";
 import { useParams, useNavigate } from "react-router-dom";
 import { ReactQueryKeys } from "react-query-enums";
 import { useQuery } from "react-query";
@@ -84,25 +84,27 @@ export const GetIssueDetailsContainer = (props: IGetIssueDetailsContainerProps) 
         nagivate(-1)
     }, [nagivate]);
 
-    const { isLoading, data, error } = useQuery(ReactQueryKeys.GetNewIssueByID, getIssueDetailsList);
+    const { isLoading, data, error } = useQuery(ReactQueryKeys.GetNewIssueByID, getIssueDetailsList, { cacheTime: 0 });
 
-    if (isLoading) {
-        return (
-            <CircularProgress />
-        )
-    }
-
-    if (data) {
+    if (isLoading || data) {
         return (
             <Modal
                 open={true}
                 onClose={dismissModel}>
                 <Box sx={style}>
-                    <UpdateIssueDetailsContainer
-                        issuesTileMetaData={data}
-                        key={data._id}
-                        invalidationKeys={invalidationKeys[status!]}
-                        changeStatusItems={changeStatusItems[status!]} />
+                    {
+                        isLoading
+                            ?
+                            <FlexBox width="100%" height="100%" justifyContent={"center"} alignItems="center">
+                                <CircularProgress />
+                            </FlexBox>
+                            : <UpdateIssueDetailsContainer
+                                issuesTileMetaData={data}
+                                key={data._id}
+                                invalidationKeys={invalidationKeys[status!]}
+                                changeStatusItems={changeStatusItems[status!]} />
+                    }
+
                 </Box>
             </Modal>
         )

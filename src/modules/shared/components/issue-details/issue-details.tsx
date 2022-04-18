@@ -6,7 +6,7 @@ import { IBodyArgs, IUpdateIssueDetailsContaionerProps } from "../../containers"
 import { IIssuesTileMetaData } from "modules/shared/types";
 
 export interface IIssueDetailsProps extends IUpdateIssueDetailsContaionerProps {
-    onUpdateIssueDetails: (body: IBodyArgs) => void;
+    onUpdateIssueDetails: (body: IBodyArgs) => Promise<Response>;
 }
 
 export interface IState {
