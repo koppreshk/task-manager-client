@@ -1,4 +1,5 @@
 import React from "react"
+import { useMutation, useQueryClient } from "react-query";
 import { ReactQueryKeys } from "react-query-enums";
 import { useServiceClient } from "../../../common";
 import { IIssuesTileMetaData, IIssueTileProps } from "../components";
@@ -31,14 +32,21 @@ export const UpdateIssueDetailsContainer = React.memo((props: IUpdateIssueDetail
     const { issuesTileMetaData, changeStatusItems, invalidationKeys } = props;
     const { status, _id } = issuesTileMetaData;
     const { postData } = useServiceClient<IBodyArgs>();
+    const queryClient = useQueryClient();
 
     const onUpdateIssueDetails = React.useCallback(async (body: IBodyArgs) => {
         return await postData(`/api/v1/${updateIssueDetailsEndPoints[status]}/${_id}`, 'PATCH', body)
     }, [_id, postData, status]);
 
+    const mutation = useMutation('updateIssueDetails', onUpdateIssueDetails, {
+        onSuccess: () => {
+            queryClient.invalidateQueries(ReactQueryKeys.GetNewIssueByID)
+        }
+    });
+    
     return (
         <IssueDetails
-            onUpdateIssueDetails={onUpdateIssueDetails}
+            onUpdateIssueDetails={mutation.mutate}
             issuesTileMetaData={issuesTileMetaData}
             invalidationKeys={invalidationKeys}
             changeStatusItems={changeStatusItems} />

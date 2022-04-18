@@ -1,5 +1,5 @@
 import React from "react"
-import { Button, TextareaAutosize, TextField } from "@mui/material"
+import { Button, TextField } from "@mui/material"
 import { FlexBox } from "../../../common"
 import { ICreateNewIssueBody } from "../api-body-types";
 import { SelectAvatarControl } from "./avatar-select-control";
@@ -88,23 +88,24 @@ export const CreateNewIssueForm = React.memo((props: ICreateIssueFormProps) => {
             <TextField
                 id="outlined-basic" label="Title" variant="outlined"
                 value={state.title}
+                autoComplete="off"
                 required
                 onChange={(ev) => dispatch({ type: 'title', payload: ev.target.value })} />
-            <TextareaAutosize
-                aria-label="Description"
-                minRows={3}
+            <TextField
+                label="Description"
+                variant="outlined"
                 title="Description"
-                style={{ width: 394 }}
+                autoComplete="off"
                 onChange={(ev) => dispatch({ type: 'description', payload: ev.target.value })}
             />
             <TextField
-                id="outlined-basic" label="Change Set Details" variant="outlined"
+                id="outlined-basic" label="Change Set Details" variant="outlined" autoComplete="off"
                 onChange={(ev) => dispatch({ type: 'changeSetDetails', payload: ev.target.value })} />
             <TextField
-                id="outlined-basic" label="Code Review Comments" variant="outlined"
+                id="outlined-basic" label="Code Review Comments" variant="outlined" autoComplete="off"
                 onChange={(ev) => dispatch({ type: 'codeReviewComments', payload: ev.target.value })} />
             <TextField
-                id="outlined-basic" label="QA Comments" variant="outlined"
+                id="outlined-basic" label="QA Comments" variant="outlined" autoComplete="off"
                 onChange={(ev) => dispatch({ type: 'qaComments', payload: ev.target.value })} />
             <SelectAvatarControl
                 label="Assignee"
