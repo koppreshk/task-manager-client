@@ -68,12 +68,12 @@ const changeStatusItems = {
     readyForRelease: []
 }
 
-export const GetIssueDetailsContainer = React.memo((props: IGetIssueDetailsContainerProps) => {
+export const GetIssueDetailsContainer = (props: IGetIssueDetailsContainerProps) => {
     const { id, status } = useParams<{ status: string, id: string }>();
     const { getData } = useServiceClient();
     const nagivate = useNavigate();
 
-    const getNewIssuesList = React.useCallback(() => {
+    const getIssueDetailsList = React.useCallback(() => {
         return getData(`/api/v1/${getIssueDetailsEndPoints[status!]}/${id}`)
             .then(response => response.json())
             .then(data => data.data)
@@ -84,7 +84,7 @@ export const GetIssueDetailsContainer = React.memo((props: IGetIssueDetailsConta
         nagivate(-1)
     }, [nagivate]);
 
-    const { isLoading, data, error } = useQuery(ReactQueryKeys.GetNewIssueByID, getNewIssuesList);
+    const { isLoading, data, error } = useQuery(ReactQueryKeys.GetNewIssueByID, getIssueDetailsList);
 
     if (isLoading) {
         return (
@@ -93,7 +93,6 @@ export const GetIssueDetailsContainer = React.memo((props: IGetIssueDetailsConta
     }
 
     if (data) {
-        console.log('data: ', data);
         return (
             <Modal
                 open={true}
@@ -101,6 +100,7 @@ export const GetIssueDetailsContainer = React.memo((props: IGetIssueDetailsConta
                 <Box sx={style}>
                     <UpdateIssueDetailsContainer
                         issuesTileMetaData={data}
+                        key={data._id}
                         invalidationKeys={invalidationKeys[status!]}
                         changeStatusItems={changeStatusItems[status!]} />
                 </Box>
@@ -111,5 +111,5 @@ export const GetIssueDetailsContainer = React.memo((props: IGetIssueDetailsConta
     return (
         <span>Error: {error}</span>
     )
-})
+}
 

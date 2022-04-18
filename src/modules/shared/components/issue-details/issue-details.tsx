@@ -1,12 +1,12 @@
 import React from "react";
-import { Button } from "@mui/material";
 import { FlexBox } from "../../../../common";
 import { IssueDetailsSection1 } from "./issue-details-section1";
 import { IssueDetailsSection2 } from "./issue-details-section2";
 import { IBodyArgs, IUpdateIssueDetailsContaionerProps } from "../../containers";
+import { IIssuesTileMetaData } from "modules/shared/types";
 
 export interface IIssueDetailsProps extends IUpdateIssueDetailsContaionerProps {
-    onUpdateIssueDetails: (body: IBodyArgs) => Promise<Response>
+    onUpdateIssueDetails: (body: IBodyArgs) => void;
 }
 
 export interface IState {
@@ -45,36 +45,36 @@ const reducer = (state: IState, action: IAction) => {
     }
 }
 
-const intialState: IState = {
-    description: '',
-    changeSetDetails: '',
-    codeReviewComments: '',
-    qaComments: '',
+const getIntialState = (args: Pick<IIssuesTileMetaData, 'description' | 'changeSetDetails' | 'codeReviewComments' | 'qaComments'>): IState => {
+    const { changeSetDetails, codeReviewComments, description, qaComments } = args;
+    return {
+        description: description || '',
+        changeSetDetails: changeSetDetails || '',
+        codeReviewComments: codeReviewComments || '',
+        qaComments: qaComments || '',
+    }
 }
 
 export const IssueDetails = React.memo((props: IIssueDetailsProps) => {
     const { issuesTileMetaData, invalidationKeys, changeStatusItems, onUpdateIssueDetails } = props;
-    const [state, dispatch] = React.useReducer(reducer, intialState);
+    const { title, description, changeSetDetails, codeReviewComments, qaComments } = issuesTileMetaData;
+    const [state, dispatch] = React.useReducer(reducer, getIntialState({ description, changeSetDetails, codeReviewComments, qaComments }));
 
     const onSubmitHandler = React.useCallback(() => {
         onUpdateIssueDetails(state);
     }, [onUpdateIssueDetails, state])
 
     return (
-        <FlexBox flexDirection="column" height="100%">
-            <FlexBox height="calc(100% - 40px)">
-                <IssueDetailsSection1
-                    dispatch={dispatch}
-                    state={state}
-                    issuesTileMetaData={issuesTileMetaData} />
-                <IssueDetailsSection2
-                    issuesTileMetaData={issuesTileMetaData}
-                    invalidationKeys={invalidationKeys}
-                    changeStatusItems={changeStatusItems} />
-            </FlexBox>
-            <Button
-                sx={{ width: '200px', position: 'absolute', right: '32px', bottom: '32px' }}
-                variant="contained" onClick={onSubmitHandler}>SUBMIT</Button>
+        <FlexBox height="calc(100% - 40px)">
+            <IssueDetailsSection1
+                title={title}
+                dispatch={dispatch}
+                onSubmitHandler={onSubmitHandler}
+                state={state} />
+            <IssueDetailsSection2
+                issuesTileMetaData={issuesTileMetaData}
+                invalidationKeys={invalidationKeys}
+                changeStatusItems={changeStatusItems} />
         </FlexBox>
     );
 })
