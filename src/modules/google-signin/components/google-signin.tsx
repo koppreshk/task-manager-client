@@ -1,8 +1,9 @@
 import React from "react";
 import GoogleLogin from "react-google-login";
 import styled from "styled-components";
-import { Avatar, Button, Icon, Typography } from "@mui/material";
-import { FlexBox, getNameInitials, useServiceClient } from "common";
+import { Button, Icon } from "@mui/material";
+import { FlexBox, useServiceClient } from "common";
+import { SignedInHeader } from "./signedin-header";
 
 interface IGoogleSignInProps { }
 
@@ -29,7 +30,6 @@ export const GoogleSignIn = React.memo((props: IGoogleSignInProps) => {
     const { postData } = useServiceClient<{ tokenId: string }>();
 
     const [signInData, setSignInData] = React.useState<{ name: string, picture: string, email: string } | null>(localStorage.getItem(LocalStorageKeys.LOGIN_DATA) ? JSON.parse(localStorage.getItem(LocalStorageKeys.LOGIN_DATA)!) : null);
-    const altText = React.useMemo(() => signInData?.name ? getNameInitials(signInData?.name) : '', [signInData?.name]);
 
     const handleFailure = React.useCallback((err) => {
         console.log(err);
@@ -64,12 +64,7 @@ export const GoogleSignIn = React.memo((props: IGoogleSignInProps) => {
             {signInData
                 ?
                 <FlexBox justifyContent={"end"}>
-                    <FlexBox flexDirection="column" padding="10px">
-                        <Avatar src={signInData.picture} sx={{ width: 30, height: 30 }} alt={altText} />
-                        <Typography>{signInData.name}</Typography>
-                        <Typography>{signInData.email}</Typography>
-                        <Button onClick={handleSignOut} variant="contained">Log Out</Button>
-                    </FlexBox>
+                    <SignedInHeader signInData={signInData} handleSignOut={handleSignOut} />
                 </FlexBox>
                 :
                 <GoogleLogin

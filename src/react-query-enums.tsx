@@ -5,5 +5,6 @@ export enum ReactQueryKeys {
     GetAllPackagingIssues = 'getAllPackagingIssues',
     GetAllQAInProgressIssues = 'getAllQAInProgressIssues',
     GetAllReadyForReleaseIssues = 'getAllReadyForReleaseIssues',
-    GetNewIssueByID = 'getNewIssueByID'
+    GetNewIssueByID = 'getNewIssueByID',
+    GetAllUsers = 'getAllUsers'
 }

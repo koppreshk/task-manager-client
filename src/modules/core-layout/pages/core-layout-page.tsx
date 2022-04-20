@@ -14,11 +14,12 @@ import { ReadyForReleaseIssuesContainer } from "modules/ready-for-release/contai
 
 const StyledFlexBox = styled(FlexBox)`
     width: 100%;
-    height: 100%;
+    height: 100%; 
 `;
 
 const IssueContainerWrapper = styled(FlexBox)`
-      height: calc(100% - 70px);  
+      height: 79%;
+      padding: 0px 20px;
 `;
 
 export const CoreLayout = React.memo(() => {
