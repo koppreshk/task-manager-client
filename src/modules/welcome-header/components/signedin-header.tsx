@@ -28,7 +28,7 @@ const PopoverContent = styled(FlexBox)`
 
 export const SignedInHeader = React.memo((props: ISignedInHeaderProps) => {
     const { signInData, handleSignOut } = props;
-    const altText = React.useMemo(() => signInData.name ? getNameInitials(signInData.name) : '', [signInData.name]);
+    const altText = React.useMemo(() => signInData?.name ? getNameInitials(signInData.name) : '', [signInData?.name]);
     const [open, setOpen] = React.useState(false);
     const avatarRef = React.useRef<HTMLDivElement>(null);
     const popperRef = React.useRef<HTMLDivElement>(null);
