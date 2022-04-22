@@ -2,7 +2,7 @@ import React from "react"
 import { Button, TextField } from "@mui/material"
 import { FlexBox } from "../../../common"
 import { ICreateNewIssueBody } from "../api-body-types";
-import { GetAllUsersContainer } from "../containers";
+import { GetAllUsersContainer } from "../containers/get-all-users-container";
 
 interface IState {
     title: string,
