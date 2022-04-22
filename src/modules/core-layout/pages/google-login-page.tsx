@@ -4,6 +4,7 @@ import styled from "styled-components";
 import GoogleLogin from "react-google-login";
 import { LocalStorageKeys } from "common-enums";
 import { useNavigate } from "react-router-dom";
+import { Typography } from "@mui/material";
 
 const LoginCard = styled(FlexBox)`
     background-color: #fff;
@@ -71,7 +72,8 @@ export const GoogleLoginPage = React.memo(() => {
                 alt="Task Manager"
                 src="https://aid-frontend.prod.atl-paas.net/atlassian-id/front-end/5.0.331/static/media/jira-left.d0ab0e98.svg" />
             <FlexBox justifyContent={"center"} alignItems="center">
-                <LoginCard justifyContent={"center"} alignItems="center">
+                <LoginCard justifyContent={"center"} flexDirection="column" gap="30px" alignItems="center">
+                    <Typography sx={{ color: '#42526e', fontWeight: 'bold' }}>TASK MANAGER</Typography>
                     <GoogleLogin
                         clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID || ''}
                         render={renderCustomLoginButton}
