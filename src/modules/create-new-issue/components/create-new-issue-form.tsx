@@ -2,7 +2,7 @@ import React from "react"
 import { Button, TextField } from "@mui/material"
 import { FlexBox } from "../../../common"
 import { ICreateNewIssueBody } from "../api-body-types";
-import { SelectAvatarControl } from "./avatar-select-control";
+import { GetAllUsersContainer } from "../containers";
 
 interface IState {
     title: string,
@@ -107,18 +107,8 @@ export const CreateNewIssueForm = React.memo((props: ICreateIssueFormProps) => {
             <TextField
                 id="outlined-basic" label="QA Comments" variant="outlined" autoComplete="off"
                 onChange={(ev) => dispatch({ type: 'qaComments', payload: ev.target.value })} />
-            <SelectAvatarControl
-                label="Assignee"
-                users={[{ fullName: 'Rakesh Kumar', value: 'Rakesh Kumar' }, { fullName: 'Manish P', value: 'Manish P' }]}
-                selectedValue={state.assignee}
-                onSelectValueChange={onSelectValueChange} />
-            <SelectAvatarControl
-                label="Reporter"
-                users={[
-                    { fullName: 'Rakesh Kumar', value: 'Rakesh Kumar' },
-                    { fullName: 'Manish P', value: 'Manish P' },
-                    { fullName: 'Krish l', value: 'Krish l' }]}
-                selectedValue={state.reporter}
+            <GetAllUsersContainer
+                selectedValue={{ [state.reporter]: state.reporter, [state.assignee]: state.assignee }}
                 onSelectValueChange={onSelectValueChange} />
             <Button type="submit" onClick={onSubmitHandler}>SUBMIT</Button>
         </FlexBox>

@@ -7,7 +7,7 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { IIssuesTileMetaData } from "../types";
-import { useNavigate } from "react-router-dom";
+import { useMatch, useNavigate } from "react-router-dom";
 
 export interface IChangeStatusItem {
     currentStatusName: string;
@@ -47,10 +47,11 @@ export const IssueTile = React.memo((props: IIssueTileProps) => {
     const dateDiffInDays = React.useMemo(() => getDateDiffInDays(new Date(createdAt ? createdAt : updatedAt), new Date()), [createdAt, updatedAt]);
     const { backgroundColor, textColor } = React.useMemo(() => chooseRandomColors(assignee), [assignee]);
     const navigate = useNavigate();
+    const match = useMatch('/welcome');
 
     const onIssueTileClick = React.useCallback(() => {
-        navigate(`/${status}/${_id}`);
-    }, [_id, navigate, status]);
+        navigate(`${match?.pathname}/${status}/${_id}`);
+    }, [_id, match, navigate, status]);
 
     return (
         <>
