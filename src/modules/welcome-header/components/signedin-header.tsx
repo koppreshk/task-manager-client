@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components";
 import { FlexBox, getNameInitials } from "common";
-import { Avatar, Button, Popper, Typography } from "@mui/material";
+import { Button, Popper, Typography } from "@mui/material";
 
 interface ISignedInHeaderProps {
     signInData: {
@@ -26,11 +26,18 @@ const PopoverContent = styled(FlexBox)`
     box-sizing: border-box;
 `;
 
+const DisplayPicture = styled.img`
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+`;
+
 export const SignedInHeader = React.memo((props: ISignedInHeaderProps) => {
     const { signInData, handleSignOut } = props;
     const altText = React.useMemo(() => signInData?.name ? getNameInitials(signInData.name) : '', [signInData?.name]);
     const [open, setOpen] = React.useState(false);
-    const avatarRef = React.useRef<HTMLDivElement>(null);
+    const avatarRef = React.useRef<HTMLImageElement>(null);
     const popperRef = React.useRef<HTMLDivElement>(null);
 
     React.useEffect(() => {
@@ -54,10 +61,10 @@ export const SignedInHeader = React.memo((props: ISignedInHeaderProps) => {
 
     return (
         <StyledFlexBox alignItems={"center"} justifyContent="flex-end">
-            <Avatar
+            <DisplayPicture
                 src={signInData.picture}
                 ref={avatarRef}
-                sx={{ width: 30, height: 30, cursor: 'pointer' }}
+                referrerPolicy="no-referrer"
                 alt={altText} onClick={handleAvatarClick} />
             <Popper
                 open={open}
