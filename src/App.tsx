@@ -2,6 +2,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools'
 import { CoreLayout } from './modules/core-layout/pages';
 import { BrowserRouter } from 'react-router-dom';
+import { NotificationProvider } from 'common';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -15,7 +16,9 @@ function App() {
   return (
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
-        <CoreLayout />
+        <NotificationProvider>
+          <CoreLayout />
+        </NotificationProvider>
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </BrowserRouter>

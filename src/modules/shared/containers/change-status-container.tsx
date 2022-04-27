@@ -1,6 +1,6 @@
 import React from "react"
 import { useMutation, useQueryClient } from "react-query";
-import { useServiceClient } from "../../../common";
+import { useNotifications, useServiceClient } from "../../../common";
 import { IChangeStatusItem } from "../components";
 import { ChangeStatus } from "../components/issue-details/parts";
 import { StatusesType } from "../types";
@@ -25,6 +25,7 @@ export const ChangeStatusContainer = React.memo((props: IChangeStatusContianerPr
     const queryClient = useQueryClient();
     const { postData } = useServiceClient<{ id: string }>();
     const [selectedValue, setValue] = React.useState<string>(status);
+    const { showNotification } = useNotifications();
 
     const onChangeStatus = React.useCallback(async (targetedStatus: keyof typeof statusChangeEndPoints) => {
         return await postData(`/api/v1/${statusChangeEndPoints[targetedStatus]}`, 'POST', {
@@ -33,10 +34,11 @@ export const ChangeStatusContainer = React.memo((props: IChangeStatusContianerPr
     }, [_id, postData]);
 
     const mutation = useMutation('changeStatus', onChangeStatus, {
-        onSuccess: () => {
-            invalidateQueryNames?.forEach((queryName) => queryClient.invalidateQueries(queryName))
+        onSuccess: (res) => {
+            invalidateQueryNames?.forEach((queryName) => queryClient.invalidateQueries(queryName));
+            res.json().then(finalRes => showNotification({ message: `Status successfully updated to ${finalRes.data[0].status}` }));
         },
-        onError: (err) => alert(err)
+        onError: (err) => showNotification({ message: `Failed to change status ${err}`, type: 'error' })
     })
 
     const handleSelectValueChange = React.useCallback((targetedStatus: string) => {

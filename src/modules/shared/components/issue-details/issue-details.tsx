@@ -1,5 +1,5 @@
 import React from "react";
-import { FlexBox } from "../../../../common";
+import { FlexBox, useNotifications } from "../../../../common";
 import { IssueDetailsSection1 } from "./issue-details-section1";
 import { IssueDetailsSection2 } from "./issue-details-section2";
 import { IBodyArgs, IUpdateIssueDetailsContaionerProps } from "../../containers";
@@ -59,10 +59,13 @@ export const IssueDetails = React.memo((props: IIssueDetailsProps) => {
     const { issuesTileMetaData, invalidationKeys, changeStatusItems, onUpdateIssueDetails } = props;
     const { title, description, changeSetDetails, codeReviewComments, qaComments } = issuesTileMetaData;
     const [state, dispatch] = React.useReducer(reducer, getIntialState({ description, changeSetDetails, codeReviewComments, qaComments }));
+    const { showNotification } = useNotifications();
 
     const onSubmitHandler = React.useCallback(() => {
-        onUpdateIssueDetails(state);
-    }, [onUpdateIssueDetails, state])
+        onUpdateIssueDetails(state)
+            .then(() => showNotification({ message: 'Successfully updated the issue' }))
+            .catch(() => showNotification({ message: 'Failed to update the task', type: 'error' }));
+    }, [onUpdateIssueDetails, showNotification, state])
 
     return (
         <FlexBox height="calc(100% - 40px)">
