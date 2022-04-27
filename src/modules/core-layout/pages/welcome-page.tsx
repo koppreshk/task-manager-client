@@ -1,11 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { WelcomeHeader } from "modules/welcome-header/components/welcome-header";
 import { IssueWrapper } from "../components";
-import { LocalStorageKeys } from "common-enums";
-import { Link } from "react-router-dom";
+import { useIsUserLoggedIn } from "common/hooks";
 
 export const WelcomePage = React.memo(() => {
-    const isLoggedIn = localStorage.getItem(LocalStorageKeys.LOGIN_DATA)
+    const isLoggedIn = useIsUserLoggedIn();
     return (
         <>
             {

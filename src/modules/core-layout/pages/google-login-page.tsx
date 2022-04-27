@@ -1,10 +1,11 @@
 import React from "react"
-import { FlexBox, useServiceClient } from "common";
+import { FlexBox, useNotifications, useServiceClient } from "common";
 import styled from "styled-components";
 import GoogleLogin from "react-google-login";
 import { LocalStorageKeys } from "common-enums";
 import { useNavigate } from "react-router-dom";
 import { Typography } from "@mui/material";
+import { useIsUserLoggedIn } from "common/hooks";
 
 const LoginCard = styled(FlexBox)`
     background-color: #fff;
@@ -36,6 +37,14 @@ const StyledButton = styled.button`
 export const GoogleLoginPage = React.memo(() => {
     const { postData } = useServiceClient<{ tokenId: string }>();
     const navigate = useNavigate();
+    const { showNotification } = useNotifications();
+    const isLoggedIn = useIsUserLoggedIn();
+
+    React.useEffect(() => {
+        if (isLoggedIn) {
+            navigate('/welcome');
+        }
+    }, [isLoggedIn, navigate]);
 
     const renderCustomLoginButton = React.useCallback((renderProps: { onClick: () => void, disabled?: boolean }) => {
         const { onClick, disabled } = renderProps;
@@ -51,18 +60,19 @@ export const GoogleLoginPage = React.memo(() => {
     }, []);
 
     const handleFailure = React.useCallback((err) => {
-        console.log(err);
-    }, []);
+        showNotification({ message: `Cannot login at the moment: ${err}`, type: 'error' })
+    }, [showNotification]);
 
     const handleSuccess = React.useCallback((response: any) => {
         postData('/api/v1/google-signin', "POST", { tokenId: response.tokenId })
             .then((res) => res.json())
             .then((finalRes) => {
                 localStorage.setItem(LocalStorageKeys.LOGIN_DATA, JSON.stringify(finalRes));
-                navigate('/welcome')
+                navigate('/welcome');
+                showNotification({ message: 'Logged In Successfully' })
             })
-            .catch((err) => console.log(err))
-    }, [navigate, postData]);
+            .catch((err) => showNotification({ message: `Cannot login at the moment: ${err}`, type: 'error' }))
+    }, [navigate, postData, showNotification]);
 
     return (
         <FlexBox flexDirection="row">
