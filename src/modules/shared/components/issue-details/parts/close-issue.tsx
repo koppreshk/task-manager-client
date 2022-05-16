@@ -28,7 +28,6 @@ export const CloseIssue = React.memo((props: ICloseIssueProps) => {
             {(status === 'readyForRelease' || status === 'new')
                 ? <StyledButton startIcon={<DeleteForeverIcon />} onClick={onCloseIssueHandler} variant="contained">Close Issue</StyledButton>
                 : null}
-
         </>
     )
 })
