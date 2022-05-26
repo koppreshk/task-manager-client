@@ -4,8 +4,8 @@ import styled from "styled-components";
 import { FlexBox } from "common";
 import { GetIssueDetailsContainer } from "modules/shared/containers";
 import { CreateIssueContainer } from "modules/create-new-issue/containers";
-import { APIEndPoints, ReactQueryKeys } from "react-query-enums";
 import { GetIssueListByStatusContainer } from "modules/shared/containers";
+import { APIEndPoints, ReactQueryKeys } from "common-enums";
 
 interface IIssueWrapperProps {
 

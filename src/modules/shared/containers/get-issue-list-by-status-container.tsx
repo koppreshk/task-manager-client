@@ -2,7 +2,7 @@ import React from "react"
 import { CircularProgress } from "@mui/material";
 import { useQuery } from "react-query";
 import { useServiceClient } from "../../../common"
-import { ReactQueryKeys } from "../../../react-query-enums";
+import { ReactQueryKeys } from "../../../common-enums";
 import { IssueListByStatus } from "../components/issue-list";
 
 interface IGetIssueListByStatusContainerProps {
