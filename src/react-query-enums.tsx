@@ -7,4 +7,13 @@ export enum ReactQueryKeys {
     GetAllReadyForReleaseIssues = 'getAllReadyForReleaseIssues',
     GetNewIssueByID = 'getNewIssueByID',
     GetAllUsers = 'getAllUsers'
+};
+
+export enum APIEndPoints {
+    GetAllNewIssues = '/api/v1/newIssues/getAllNewIssues',
+    GetAllDevIssues = '/api/v1/devIssues/getAllDevIssues',
+    GetAllCodeReviewIssues = '/api/v1/codeReviewIssues/getAllCodeReviewIssues',
+    GetAllPackagingIssues = '/api/v1/packagingIssues/getAllPackagingIssues',
+    GetAllQAInProgressIssues = '/api/v1/qaInProgressIssues/getAllQAInProgressIssues',
+    GetAllReadyForReleaseIssues = '/api/v1/readyForReleaseIssues/getAllReadyForReleaseIssues',
 }

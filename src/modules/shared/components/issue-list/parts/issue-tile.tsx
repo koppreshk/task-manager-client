@@ -1,12 +1,12 @@
 import React from "react"
 import styled from "styled-components";
 import { Avatar, Tooltip, Typography } from "@mui/material";
-import { FlexBox, getDateDiffInDays, getNameInitials, chooseRandomColors } from "../../../common";
+import { FlexBox, getDateDiffInDays, getNameInitials, chooseRandomColors } from "../../../../../common";
 import DensitySmallIcon from '@mui/icons-material/DensitySmall';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import { IIssuesTileMetaData } from "../types";
+import { IIssuesTileMetaData } from "../../../types";
 import { useMatch, useNavigate } from "react-router-dom";
 
 export interface IChangeStatusItem {
@@ -14,6 +14,7 @@ export interface IChangeStatusItem {
     targetStatusName: string;
     targetStatusValue: string;
 }
+
 export interface IIssueTileProps {
     issuesTileMetaData: IIssuesTileMetaData;
 }

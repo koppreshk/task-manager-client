@@ -1,6 +1,6 @@
 import React from "react"
 import { styled, Typography } from "@mui/material";
-import { FlexBox } from "../../../common";
+import { FlexBox } from "../../../../../common";
 
 interface IHeaderWithCountProps {
     headerLabel: string;

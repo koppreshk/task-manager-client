@@ -4,10 +4,10 @@ import styled from "styled-components";
 import { FlexBox, UserAvatar } from "common";
 import { IIssuesTileMetaData } from "../../../types";
 import { GridLayout } from "../../../../../common/grid-layout";
-import { getPriorityIconComponent } from "../../issue-tile";
+import { getPriorityIconComponent } from "../../issue-list/parts/issue-tile";
 import { CloseIssueContainer } from "modules/shared/containers";
 
-interface IMoreDetailsProps extends Pick<IIssuesTileMetaData, 'assignee' | 'reporter' | 'priority' | 'createdAt' | 'updatedAt' > {
+interface IMoreDetailsProps extends Pick<IIssuesTileMetaData, 'assignee' | 'reporter' | 'priority' | 'createdAt' | 'updatedAt'> {
 }
 
 const HorizontalLine = styled.hr`
