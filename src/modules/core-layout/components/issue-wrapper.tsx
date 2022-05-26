@@ -28,23 +28,23 @@ const statuses = [{
 }, {
     apiEndPoint: APIEndPoints.GetAllDevIssues,
     queryKey: ReactQueryKeys.GetAllDevIssues,
-    statusHeaderLabel: 'Dev'
+    statusHeaderLabel: 'DEVELOPMENT IN PROGRESS'
 }, {
     apiEndPoint: APIEndPoints.GetAllCodeReviewIssues,
     queryKey: ReactQueryKeys.GetAllCodeReviewIssues,
-    statusHeaderLabel: 'Code Review'
+    statusHeaderLabel: 'CODE REVIEW'
 }, {
     apiEndPoint: APIEndPoints.GetAllPackagingIssues,
     queryKey: ReactQueryKeys.GetAllPackagingIssues,
-    statusHeaderLabel: 'Packaging'
+    statusHeaderLabel: 'PACKAGING'
 }, {
     apiEndPoint: APIEndPoints.GetAllQAInProgressIssues,
     queryKey: ReactQueryKeys.GetAllQAInProgressIssues,
-    statusHeaderLabel: 'QAInProgress'
+    statusHeaderLabel: 'QA IN PROGRESS'
 }, {
     apiEndPoint: APIEndPoints.GetAllReadyForReleaseIssues,
     queryKey: ReactQueryKeys.GetAllReadyForReleaseIssues,
-    statusHeaderLabel: 'Ready For Release'
+    statusHeaderLabel: 'READY FOR RELEASE'
 }];
 
 export const IssueWrapper = React.memo((props: IIssueWrapperProps) => {
