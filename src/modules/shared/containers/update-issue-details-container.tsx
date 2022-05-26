@@ -1,5 +1,5 @@
 import React from "react"
-import { ReactQueryKeys } from "react-query-enums";
+import { ReactQueryKeys } from "common-enums";
 import { useServiceClient } from "../../../common";
 import { IIssuesTileMetaData, IIssueTileProps } from "../components";
 import { IssueDetails } from "../components/issue-details";

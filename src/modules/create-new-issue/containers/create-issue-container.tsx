@@ -1,7 +1,7 @@
 import React from "react"
 import { useMutation, useQueryClient } from "react-query";
 import { useNotifications, useServiceClient } from "../../../common";
-import { ReactQueryKeys } from "../../../react-query-enums";
+import { APIEndPoints, ReactQueryKeys } from "../../../common-enums";
 import { ICreateNewIssueBody } from "../api-body-types";
 import { CreateNewIssue } from "../components"
 
@@ -11,7 +11,7 @@ export const CreateIssueContainer = React.memo(() => {
     const { showNotification } = useNotifications();
 
     const onCreateNewIssue = React.useCallback(async (args: ICreateNewIssueBody) => {
-        return await postData('/api/v1/newIssues/createNewIssue', 'POST', args)
+        return await postData(APIEndPoints.PostCreateNewIssue, 'POST', args)
     }, [postData]);
 
     const mutation = useMutation('createNewIssue', onCreateNewIssue, {

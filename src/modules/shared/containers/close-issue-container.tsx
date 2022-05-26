@@ -3,7 +3,7 @@ import { useNotifications, useServiceClient } from "common";
 import { useNavigate, useParams } from "react-router-dom";
 import { CloseIssue } from "../components/issue-details/parts";
 import { useMutation, useQueryClient } from "react-query";
-import { ReactQueryKeys } from "react-query-enums";
+import { ReactQueryKeys } from "common-enums";
 
 const closeIssuePath = {
     new: 'newIssues/deleteNewIssue',

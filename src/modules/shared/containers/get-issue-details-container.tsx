@@ -1,10 +1,10 @@
 import React from "react";
-import { FlexBox, useServiceClient } from "common";
 import { useParams, useNavigate } from "react-router-dom";
-import { ReactQueryKeys } from "react-query-enums";
 import { useQuery } from "react-query";
 import { Box, CircularProgress, Modal } from "@mui/material";
 import { UpdateIssueDetailsContainer } from "./update-issue-details-container";
+import { FlexBox, useServiceClient } from "common";
+import { ReactQueryKeys } from "common-enums";
 
 interface IGetIssueDetailsContainerProps { }
 

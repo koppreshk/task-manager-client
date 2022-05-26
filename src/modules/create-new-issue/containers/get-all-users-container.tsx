@@ -2,7 +2,7 @@ import React from "react"
 import { CircularProgress } from "@mui/material";
 import { useQuery } from "react-query";
 import { useServiceClient } from "../../../common"
-import { ReactQueryKeys } from "../../../react-query-enums";
+import { APIEndPoints, ReactQueryKeys } from "../../../common-enums";
 import { SelectUsers } from "../components/select-users";
 
 interface IGetAllUsers {
@@ -17,7 +17,7 @@ export const GetAllUsersContainer = React.memo((props: IGetAllUsers) => {
     const { getData } = useServiceClient();
 
     const getAllUsers = React.useCallback(() => {
-        return getData('/api/v1/getAllUsers')
+        return getData(APIEndPoints.GetAllUsers)
             .then(response => response.json())
             .catch(err => err);
     }, [getData]);
