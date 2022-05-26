@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { WelcomeHeader } from "modules/welcome-header/components/welcome-header";
-import { IssueWrapper } from "../components";
+import { WelcomeHeader } from "modules/welcome-header/components";
 import { useIsUserLoggedIn } from "common/hooks";
+import { IssueWrapper } from "modules/core-layout/components";
 
 export const WelcomePage = React.memo(() => {
     const isLoggedIn = useIsUserLoggedIn();

@@ -1,2 +1,2 @@
 export * from './core-layout-page';
-export * from './google-login-page';
+export * from './parts/google-login-page';
