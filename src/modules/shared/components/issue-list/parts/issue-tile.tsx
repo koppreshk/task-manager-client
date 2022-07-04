@@ -1,5 +1,5 @@
 import React from "react"
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Avatar, Tooltip, Typography } from "@mui/material";
 import { FlexBox, getDateDiffInDays, getNameInitials, chooseRandomColors } from "../../../../../common";
 import DensitySmallIcon from '@mui/icons-material/DensitySmall';
@@ -19,6 +19,24 @@ export interface IIssueTileProps {
     issuesTileMetaData: IIssuesTileMetaData;
 }
 
+export const tileAnimation = css`
+    animation: zoomInLeft 0.5s;
+
+    @keyframes zoomInLeft {
+        from {
+            opacity: 0;
+            transform: scale3d(0.1, 0.1, 0.1) translate3d(-1000px, 0, 0);
+            animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+        }
+
+        60% {
+            opacity: 1;
+            transform: scale3d(0.475, 0.475, 0.475) translate3d(10px, 0, 0);
+            animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
+        }
+    }
+`;
+
 const StyledFlexBox = styled(FlexBox)`
     width: calc(100% - 20px);
     background-color: #fff;
@@ -27,24 +45,7 @@ const StyledFlexBox = styled(FlexBox)`
     box-sizing: border-box;
     margin: 10px 10px 0px 10px;
     cursor: pointer;
-    animation: backInLeft 0.5s;
-
-    @keyframes backInLeft {
-        0% {
-            transform: translateX(-2000px) scale(0.7);
-            opacity: 0.7;
-        }
-
-        80% {
-            transform: translateX(0px) scale(0.7);
-            opacity: 0.7;
-        }
-
-        100% {
-            transform: scale(1);
-            opacity: 1;
-        }
-    }
+    ${tileAnimation};
 `;
 
 export const getPriorityIconComponent = (priority: string) => {

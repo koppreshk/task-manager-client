@@ -1,4 +1,4 @@
-export const getNameInitials = (fullName: string) => fullName.split(' ').map(name => name[0].toUpperCase()).join('');
+export const getNameInitials = (fullName: string) => fullName.split(' ').map(name => name[0]?.toUpperCase()).join('');
 
 const _MS_PER_DAY = 1000 * 60 * 60 * 24;
 
