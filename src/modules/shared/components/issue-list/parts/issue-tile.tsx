@@ -27,6 +27,24 @@ const StyledFlexBox = styled(FlexBox)`
     box-sizing: border-box;
     margin: 10px 10px 0px 10px;
     cursor: pointer;
+    animation: backInLeft 0.5s;
+
+    @keyframes backInLeft {
+        0% {
+            transform: translateX(-2000px) scale(0.7);
+            opacity: 0.7;
+        }
+
+        80% {
+            transform: translateX(0px) scale(0.7);
+            opacity: 0.7;
+        }
+
+        100% {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
 `;
 
 export const getPriorityIconComponent = (priority: string) => {
@@ -55,21 +73,19 @@ export const IssueTile = React.memo((props: IIssueTileProps) => {
     }, [_id, match, navigate, status]);
 
     return (
-        <>
-            <StyledFlexBox flexDirection="column" gap="4px" onClick={onIssueTileClick}>
-                <Typography variant="subtitle2" sx={{ wordBreak: 'break-word' }}>{title}</Typography>
-                <FlexBox gap="8px">
-                    <Tooltip title={priority} arrow>
-                        {PriorityComponent}
-                    </Tooltip>
-                    <Tooltip title={`${dateDiffInDays} days in this column`} arrow>
-                        <AccessTimeIcon />
-                    </Tooltip>
-                    <Tooltip title={`Assignee: ${assignee}`} arrow>
-                        <Avatar sx={{ bgcolor: backgroundColor, color: textColor, width: 24, height: 24, fontSize: '12px', fontWeight: 600 }}>{intitals}</Avatar>
-                    </Tooltip>
-                </FlexBox>
-            </StyledFlexBox>
-        </>
+        <StyledFlexBox flexDirection="column" gap="4px" onClick={onIssueTileClick}>
+            <Typography variant="subtitle2" sx={{ wordBreak: 'break-word' }}>{title}</Typography>
+            <FlexBox gap="8px">
+                <Tooltip title={priority} arrow>
+                    {PriorityComponent}
+                </Tooltip>
+                <Tooltip title={`${dateDiffInDays} days in this column`} arrow>
+                    <AccessTimeIcon />
+                </Tooltip>
+                <Tooltip title={`Assignee: ${assignee}`} arrow>
+                    <Avatar sx={{ bgcolor: backgroundColor, color: textColor, width: 24, height: 24, fontSize: '12px', fontWeight: 600 }}>{intitals}</Avatar>
+                </Tooltip>
+            </FlexBox>
+        </StyledFlexBox>
     )
 }) 
